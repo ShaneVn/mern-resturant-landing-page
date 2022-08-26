@@ -1,0 +1,56 @@
+
+
+
+/* 
+.app__header .img{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+
+.app__header .img span{
+  background: url("../../assets/wine.jpg");
+  width: 20%;
+  height: 110%;
+  transition: 0.9s ease-in-out;
+  align-items: center;
+  background-size: cover;
+}
+
+.img span:nth-child(1) {
+  background-position: 0%;
+  transition-delay: 0;
+}
+
+.img span:nth-child(2) {
+  background-position: 25%;
+  transition-delay: 0.1s;
+}
+
+.img span:nth-child(3) {
+  background-position: 50%;
+  transition-delay: 0.2s;
+}
+
+.img span:nth-child(4) {
+  background-position: 75%;
+  transition-delay: 0.3s;
+}
+.img span:nth-child(5) {
+  background-position: 100%;
+  transition-delay: 0.4s;
+}
+
+.img span{
+  transform: translateY(-100%);
+} 
+ */
+
+
+
+
+

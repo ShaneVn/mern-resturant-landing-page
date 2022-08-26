@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .nav-hover {
+    @apply hover:text-color_golden duration-200 ease-in transition;
+  }
+
+  .section-title {
+    @apply font-cormorant lg:text-[64px] text-[45px] text-color_golden tracking-wide font-medium;
+  }
+
+  .hover-image {
+    @apply duration-300 ease-in-out hover:scale-110 cursor-pointer;
+  }
+
+  .body-text {
+    @apply leading-8 font-openSans text-color_grey tracking-wide;
+  }
+
+  .flex-center{
+    @apply flex items-center justify-center
+  }
+
+  .flex-between{
+    @apply flex items-center justify-between
+  }
+
+  .flex-col-center{
+    @apply flex flex-col items-center justify-center
+  }
+
+  .checkout-text{
+    @apply font-openSans tracking-[0.04em] text-white 
+  }
+}
+
+:root {
+  --font-base: "Cormorant Upright", serif;
+  --font-alt: "Open Sans", sans-serif;
+
+  --color-golden: #dcca87;
+  --color-black: #0c0c0c;
+  --color-gray: #545454;
+  --color-crimson: #f5efdb;
+  --color-grey: #aaaaaa;
+  --color-white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+/* body{
+  -webkit-overflow-scrolling: auto
+} */
+
+a {
+  color: unset;
+  text-decoration: none;
+}
+
+.slide-bottom {
+  -webkit-animation: slide-bottom 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-bottom 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-bottom {
+  0% {
+    -webkit-transform: translateY(-25%);
+    transform: translateY(-25%);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-bottom {
+  0% {
+    -webkit-transform: translateY(-25%);
+    transform: translateY(-25%);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
