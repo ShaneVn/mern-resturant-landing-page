@@ -6,14 +6,21 @@ import { useNavigate } from "react-router-dom";
 import { RiShoppingCartLine, RiShoppingCartFill } from "react-icons/ri";
 import { useRecoilState } from "recoil";
 import { cartState } from "../../atoms/atoms";
-import {MdLocationOn} from "react-icons/md";
+import { userState } from "../../atoms/atoms";
 
 // <GiHamburgerMenu/>
 const Navbar = () => {
   const [isToggle, setIsToggle] = useState(false);
   const [cart, setCart] = useRecoilState(cartState);
-  const [totalItmes, setTotalItems] = useState(0);
+  const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
+
+  const handleSignOut = () =>{
+    setUser(null)
+    navigate('/')
+  }
+
+  console.log(user);
 
   return (
     <div
@@ -75,7 +82,7 @@ const Navbar = () => {
               >
                 <RiShoppingCartFill fontSize={35} />
               </a>
-              <div
+              {/* <div
                 className="bg-white opacity-0 peer-hover:opacity-100 flex__center
               group-hover:flex__center w-[150px] h-[50px] absolute
                top-[50px] right-[-70px] rounded-xl duration-1000 ease-in-out"
@@ -85,7 +92,7 @@ const Navbar = () => {
                   You have {cart.reduce((a, c) => a + c.quantity, 0)}
                   <span>{cart.length > 1 ? "items" : "item"}</span>
                 </h1>
-              </div>
+              </div> */}
             </div>
           ) : (
             <div className="relative">
@@ -96,7 +103,7 @@ const Navbar = () => {
               >
                 <RiShoppingCartLine fontSize={35} />
               </a>
-              <div
+              {/* <div
                 className="bg-white opacity-0 peer-hover:opacity-100 flex__center
           group-hover:flex__center w-[150px] h-[50px] absolute
            top-[50px] right-[-70px] rounded-xl duration-1000 ease-in-out"
@@ -104,7 +111,7 @@ const Navbar = () => {
                 <h1 className="body-text text-color_black font-cormorant text-[20px] font-medium">
                   No item in Cart
                 </h1>
-              </div>
+              </div> */}
             </div>
           )}
         </div>
@@ -116,10 +123,25 @@ const Navbar = () => {
           Order Online
         </a>
         <div className="border-[0.5px] #545454 h-[30px] border-color_gray" />
-        
-        <a className="nav-hover text-lg" onClick={()=>navigate("/signin")} href="#signin">
-          Login / Register
-        </a>
+
+        {user ? (
+          <div className="cursor-pointer  relative group  ">
+            {" "}
+            <p className="nav-hover">Hello {user.name}</p>
+            <div className="bg-color_black rounded-lg absolute  w-[150px] p-3 flex flex-col text-white text-lg opacity-0 group-hover:opacity-100 duration-1000 ease-in-out">
+                <p className="mb-3 nav-hover" onClick={handleSignOut}>Sign out </p>
+                <p className="nav-hover">Order History</p>
+            </div>
+          </div>
+        ) : (
+          <a
+            className="nav-hover text-lg"
+            onClick={() => navigate("/signin")}
+            href="#signin"
+          >
+            Login / Register
+          </a>
+        )}
       </div>
 
       <div className="lg:hidden flex items-center nav-hover cursor-pointer">

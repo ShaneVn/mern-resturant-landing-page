@@ -58,11 +58,4 @@ exports.product = {
   ],
 };
 
-exports.sampleUser = [
-  {
-    name: "shane",
-    email: "admin@exmaple.com",
-    password: bcrypt.hashSync("123456"),
-    isAdmin: true,
-  },
-];
+

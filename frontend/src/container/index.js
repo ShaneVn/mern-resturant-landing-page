@@ -11,8 +11,12 @@ import Order from './Order/Order';
 import OrderBody from './OrderBody/OrderBody';
 import PageNotFound from './PageNotFound/PageNotFound';
 import Location from './Location/Location';
+import Signup from './Signup/Signup';
+import OrderHistory from './OrderHistory/OrderHistory';
 
 export {
+  OrderHistory,
+  Signup,
   Location,
   PageNotFound,
   AboutUs,

@@ -9,3 +9,8 @@ export const cartState = atom({
     effects_UNSTABLE: [persistAtom],
 })
 
+
+export const userState = atom({
+    key: "userState",
+    default: {},
+})

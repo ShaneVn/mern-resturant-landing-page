@@ -6,8 +6,7 @@ const path = require("path");
 const logger = require("morgan");
 const cors = require("cors");
 const product = require("./data.js");
-const seedRouter = require("./routes/seedRoute.js");
-const userRouter = require("./routes/userRoute.js");
+const userRoute = require("./routes/userRoute.js");
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -30,9 +29,9 @@ app.get("/api/product", (req, res) => {
   res.send(product);
 });
 
-app.use("/api/seed", seedRouter);
 
-app.use("/api/users", userRouter);
+
+app.use("/api/users", userRoute);
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
