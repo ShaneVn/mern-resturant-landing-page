@@ -5,6 +5,9 @@ import { FaLock } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { userState } from "../../atoms/atoms";
 import { useRecoilState } from "recoil";
+import displayError from "../../utils/displayError";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Signin.css";
 
 function Signin() {
@@ -25,11 +28,10 @@ function Signin() {
       });
       setUser(data);
     } catch (err) {
-      setError(err.response.data.message);
+      setError(displayError(err));
+      toast.error(displayError(err));
     }
   };
-
-
 
   return (
     <div className="bg-[#12181b] h-screen flex__center " id="signin">
@@ -73,7 +75,11 @@ function Signin() {
           </button>
         </form>
 
-        {error && <p className="mb-5 text-[#FF9494] ">{error}</p>}
+        {/* {error && (
+          <div>
+            <p className="mb-5 text-[#FF9494] ">{error}</p>
+          </div>
+        )} */}
         <p className="text-[#b2becd]">
           Don' have an Account?{" "}
           <span

@@ -21,6 +21,7 @@ const SpecialMenu = () => {
   },[])
 
 
+  console.log(drink)
 
 
 
@@ -49,7 +50,7 @@ const SpecialMenu = () => {
           <h1 className="text-color_white font-cormorant text-[40px] mb-10">
             Wine & Beer
           </h1>
-          {drink?.product?.wines.map((wine, index) => (
+          {drink?.wines?.map((wine, index) => (
             <MenuItem
               key={wine.title + index}
               title={wine.title}
@@ -79,7 +80,7 @@ const SpecialMenu = () => {
           <h1 className="text-color_white font-cormorant text-[40px] mb-10 mt-5 sm:mt-0">
             Cocktails
           </h1>
-          {drink?.product?.cocktails.map((wine, index) => (
+          {drink?.cocktails?.map((wine, index) => (
             <MenuItem
               key={wine.title + index}
               title={wine.title}

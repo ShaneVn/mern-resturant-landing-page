@@ -3,12 +3,14 @@ import Button from "../Button/Button";
 
 import { useRecoilState } from "recoil";
 import { cartState } from "../../atoms/atoms";
+import { toast } from "react-toastify";
 
 function OrderItem({ desc, image, name, price, alt, id }) {
   const [cart, setCart] = useRecoilState(cartState);
 
   const addItmesToCart = () => {
     const currentItemIndex = cart.findIndex((item) => item.id === id);
+    toast.success("You Have Add An Item To Cart")
     if (currentItemIndex >= 0) {
       setCart((cart) =>
         cart.map((item) => {

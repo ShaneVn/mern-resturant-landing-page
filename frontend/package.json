@@ -24,6 +24,7 @@
     "react-lottie": "^1.2.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.0.8",
     "react-waypoint": "^10.3.0",
     "recoil": "^0.7.5",
     "recoil-persist": "^4.2.0",

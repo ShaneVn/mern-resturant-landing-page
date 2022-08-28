@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 
-exports.product = {
+module.exports = product = {
   wines: [
     {
       title: "Chapel Hill Shiraz",
@@ -57,5 +57,7 @@ exports.product = {
     },
   ],
 };
+
+
 
 

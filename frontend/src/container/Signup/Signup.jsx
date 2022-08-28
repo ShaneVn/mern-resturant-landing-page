@@ -5,6 +5,8 @@ import { HiOutlineMail } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { userState } from "../../atoms/atoms";
 import { useRecoilState,} from "recoil";
+import displayError from "../../utils/displayError";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 function Signup() {
@@ -29,7 +31,8 @@ function Signup() {
       });
       setUser(data);
     } catch (err) {
-      setError((err.response.data.message))
+      setError(displayError(err))
+      toast.error(displayError(err));
     }
   };
 
@@ -91,7 +94,7 @@ function Signup() {
           </button>
         </form>
 
-        { error && <p className="mb-5 text-[#FF9494] ">{error}</p>}
+        {/* { error && <p className="mb-5 text-[#FF9494] ">{error}</p>} */}
         <p className="text-[#b2becd]">
           Don' have an Account?{" "}
           <span

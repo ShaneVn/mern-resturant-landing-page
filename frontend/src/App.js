@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import IfUserSignIn from "./utils/IfUserSignIn";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer} from "react-toastify";
 import {
   OrderHistory,
   AboutUs,
@@ -28,6 +30,7 @@ const App = () => {
   return (
     <div className="h-screen">
       <BrowserRouter>
+      <ToastContainer position="bottom-left" limit={1} />
         <Routes>
           <Route
             exact

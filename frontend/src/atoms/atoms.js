@@ -13,4 +13,5 @@ export const cartState = atom({
 export const userState = atom({
     key: "userStateKey",
     default: null,
+    effects_UNSTABLE: [persistAtom],
 })
