@@ -96,7 +96,7 @@ function Signup() {
 
         { error && <p className="mb-5 text-[#FF9494] ">{error}</p>}
         <p className="text-[#b2becd]">
-          Don' have an Account?{" "}
+          Already have an Account?{" "}
           <span
             className="cursor-pointer text-[#3E73CE] nav-hover"
             onClick={() => navigate("/signin")}
