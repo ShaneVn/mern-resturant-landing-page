@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { FaLock } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { userState } from "../../atoms/atoms";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState,} from "recoil";
 import axios from "axios";
-import { set } from "mongoose";
-import { use } from "express/lib/router";
 
 function Signup() {
   const navigate = useNavigate();
@@ -16,6 +14,7 @@ function Signup() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useRecoilState(userState);
+  const [error,setError] = useState("")
   
 
 
@@ -23,14 +22,14 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const { data } = axios.post("/api/users/signup", {
+      const { data } = await axios.post("/api/users/signup", {
         email,
         name,
         password,
       });
       setUser(data);
     } catch (err) {
-      console.log(err)
+      setError((err.response.data.message))
     }
   };
 
@@ -91,6 +90,8 @@ function Signup() {
             Sign Up
           </button>
         </form>
+
+        { error && <p className="mb-5 text-[#FF9494] ">{error}</p>}
         <p className="text-[#b2becd]">
           Don' have an Account?{" "}
           <span

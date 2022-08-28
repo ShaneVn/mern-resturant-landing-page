@@ -28,8 +28,16 @@ userRoute.post(
 );
 
 userRoute.post(
-  '/signup',
+  "/signup",
   expressAsyncHandler(async (req, res) => {
+    const checkUser = await User.findOne({ email: req.body.email });
+
+    if (checkUser) {
+      res.status(400).send({ message: "user already exists" });
+
+      return;
+    }
+
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
