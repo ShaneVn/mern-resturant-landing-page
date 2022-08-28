@@ -94,7 +94,7 @@ function Signup() {
           </button>
         </form>
 
-        {/* { error && <p className="mb-5 text-[#FF9494] ">{error}</p>} */}
+        { error && <p className="mb-5 text-[#FF9494] ">{error}</p>}
         <p className="text-[#b2becd]">
           Don' have an Account?{" "}
           <span
