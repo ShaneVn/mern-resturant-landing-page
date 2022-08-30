@@ -34,4 +34,29 @@ sendEmailRoute.post("/sendemail", async (req, res) => {
   });
 });
 
+
+sendEmailRoute.post("/receivemail", async (req, res) => {
+  const {name, email, message } = await req.body;
+ 
+
+  const mailOptions = {
+    from: "Shanelandingsender@hotmail.com",
+    to: "shanereact115@gmail.com",
+    subject: "Message from customer",
+    text: `name:${name} \nemail:${email} \nmessage:${message}`,
+
+  };
+
+  transporter.sendMail(mailOptions, function (error) {
+    if (error) {
+      console.log(error);
+      return
+    } else {
+      res.status(200).send({message:"Mail send"})
+    }
+  });
+});
+
+
+
 module.exports = sendEmailRoute;

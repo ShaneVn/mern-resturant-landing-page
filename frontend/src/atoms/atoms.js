@@ -10,12 +10,12 @@ export const cartState = atom({
 });
 
 export const modalState = atom({
-  key: "modalState",
+  key: "modalStateKey",
   default: false,
 });
 
 export const loadingState = atom({
-  key: "loadingState",
+  key: "loadingStateKey",
   default: false,
 });
 

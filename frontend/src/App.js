@@ -121,11 +121,15 @@ const App = () => {
             exact
             path="/location"
             element={
-              <>
-                <Navbar />
-                <Location />
-                <Footer />
-              </>
+              isloading ? (
+                <Loading />
+              ) : (
+                <>
+                  <Navbar />
+                  <Location />
+                  <Footer />
+                </>
+              )
             }
           />
 
@@ -135,8 +139,7 @@ const App = () => {
             element={
               isloading ? (
                 <>
-                <Navbar/>
-                <Loading />
+                  <Loading />
                 </>
               ) : (
                 <>

@@ -111,6 +111,7 @@ function Payment() {
           <a
             href="#order_body"
             className="flex__center space-x-5 self-start mt-[-30px] nav-hover"
+            onClick={()=>navigate('/checkout')}
           >
             <HiOutlineArrowNarrowLeft fontSize={25} /> <h1>Go Back To Cart</h1>
           </a>
