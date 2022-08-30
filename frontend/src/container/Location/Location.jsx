@@ -4,6 +4,7 @@ import "./Location.css";
 import { images } from "../../constants";
 import { SubHeading } from "../../components";
 import { Button } from "../../components";
+import ContactTextInput from "../../components/TextInput/ContactTextInput";
 
 function Location() {
   const sendEmail = () => {};
@@ -48,26 +49,15 @@ function Location() {
           <SubHeading title="contact" />
           <h1 className="section-title mb-[50px]">Send a message</h1>
           <form onSubmit={sendEmail} className="space-y-10 mb-10">
-            <div className=" border-[1px] w-full xl:mr-10 mb-5 xl:mb-0 border-color_gray rounded-[5px] overflow-hidden text-lg ">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="app__bg outline-none text-color_white p-4 caret-white font-cormorant w-full "
-              />
-            </div>
-            <div className=" border-[1px] w-full xl:mr-10 mb-5 xl:mb-0 border-color_gray rounded-[5px] overflow-hidden text-lg ">
-              <input
-                type="text"
-                placeholder="Your Email"
-                className="app__bg outline-none text-color_white p-4 caret-white font-cormorant w-full "
-              />
-            </div>
+            <ContactTextInput placeholder="Your Name" />
+            <ContactTextInput placeholder="Your Email" />
 
             <div className=" border-[1px] w-full xl:mr-10 mb-5 xl:mb-0 border-color_gray rounded-[5px] overflow-hidden text-lg ">
               <textarea
                 type="text"
                 placeholder="Your Message"
                 className="app__bg outline-none text-color_white p-4 pb-12 caret-white font-cormorant w-full "
+                required
               />
             </div>
           </form>

@@ -3,7 +3,7 @@ const express = require("express")
 const seedRouter = express.Router();
 const Product = require("../models/productModel.js")
 
-console.log(product)
+
 
 seedRouter.get('/', async (req, res) => {
     await Product.remove({});

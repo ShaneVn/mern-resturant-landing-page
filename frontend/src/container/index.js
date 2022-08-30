@@ -13,8 +13,15 @@ import PageNotFound from './PageNotFound/PageNotFound';
 import Location from './Location/Location';
 import Signup from './Signup/Signup';
 import OrderHistory from './OrderHistory/OrderHistory';
+import Payment from './Payment/Payment';
+import Signin from "./Signin/Signin"
+import CheckOut from './CheckOut/CheckOut';
+
 
 export {
+  CheckOut,
+  Signin,
+  Payment,
   OrderHistory,
   Signup,
   Location,

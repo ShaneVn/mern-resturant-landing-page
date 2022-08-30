@@ -8,6 +8,7 @@ const cors = require("cors");
 const product = require("./data.js");
 const userRoute = require("./routes/userRoute.js");
 const seedRouter = require("./routes/seedRoute.js")
+const sendEmailRoute = require("./routes/sendEmailRoute.js")
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -33,6 +34,7 @@ app.get("/api/product", (req, res) => {
 
 app.use('/api/seed', seedRouter);
 app.use("/api/users", userRoute);
+app.use("/api/email", sendEmailRoute);
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });

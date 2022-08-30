@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import IfUserSignIn from "./utils/IfUserSignIn";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import {
+  Payment,
   OrderHistory,
   AboutUs,
   Chef,
@@ -19,18 +20,22 @@ import {
   PageNotFound,
   Location,
   Signup,
+  CheckOut,
+  Signin,
 } from "./container";
 import { Navbar } from "./components";
+import { loadingState } from "./atoms/atoms";
+import { useRecoilState } from "recoil";
 import "./App.css";
-import CheckOut from "./container/CheckOut/CheckOut";
-import Payment from "./container/Payment/Payment";
-import Signin from "./container/Signin/Signin";
+import Loading from "./components/Loading/Loading";
 
 const App = () => {
+  const [isloading, setIsloading] = useRecoilState(loadingState);
+
   return (
     <div className="h-screen">
       <BrowserRouter>
-      <ToastContainer position="bottom-left" limit={1} />
+        <ToastContainer position="bottom-left" limit={1} />
         <Routes>
           <Route
             exact
@@ -121,6 +126,25 @@ const App = () => {
                 <Location />
                 <Footer />
               </>
+            }
+          />
+
+          <Route
+            exact
+            path="/payment"
+            element={
+              isloading ? (
+                <>
+                <Navbar/>
+                <Loading />
+                </>
+              ) : (
+                <>
+                  <Navbar />
+                  <Payment />
+                  <Footer />
+                </>
+              )
             }
           />
 

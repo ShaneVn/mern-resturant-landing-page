@@ -33,7 +33,7 @@ userRoute.post(
     const checkUser = await User.findOne({ email: req.body.email });
 
     if (checkUser) {
-      res.status(400).send({ message: "user already exists" });
+      res.status(400).send({ message: "Email Already Exist" });
 
       return;
     }

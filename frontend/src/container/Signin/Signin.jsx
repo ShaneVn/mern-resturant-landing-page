@@ -27,6 +27,7 @@ function Signin() {
         password,
       });
       setUser(data);
+      toast.success("You Have Signed In")
     } catch (err) {
       setError(displayError(err));
       toast.error(displayError(err));

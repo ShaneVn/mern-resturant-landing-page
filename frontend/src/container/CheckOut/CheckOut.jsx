@@ -1,13 +1,15 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { cartState } from "../../atoms/atoms";
+import { cartState, modalState } from "../../atoms/atoms";
 import { Button, CheckOutDetailsList, CheckOutItems } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
+import Modal from "../../components/Modal/Modal";
 
 function CheckOut() {
   const [cart, setCart] = useRecoilState(cartState);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useRecoilState(modalState);
 
   const totalItems = cart.reduce((a, b) => a + b.quantity, 0);
 
@@ -58,6 +60,7 @@ function CheckOut() {
           </div>
         </div>
 
+        {/* Payment box here */}
         <div className="flex-col-center checkout-text w-[70%] 2xl:w-[20%] space-y-9 self-start md:w-[50%]">
           <CheckOutDetailsList category={"Total Items:"} info={totalItems} />
           <CheckOutDetailsList category={"Tax:"} info={`$${taxes}`} />
@@ -71,20 +74,19 @@ function CheckOut() {
           />
 
           {cart.length > 0 && (
-            <a
-              href="#payment"
+            <button
               className="bg-[#FFA41C] relative group py-3 flex__center font-medium w-full rounded-lg text-color_black cursor-pointer "
-              onClick={() => navigate("/checkout/payment")}
+              onClick={() => navigate('/payment')}
             >
               <div className="absolute inset-0 bg-color_black  duration-300 ease-in-out opacity-0 group-hover:opacity-30 w-full h-full" />
               CheckOut
-            </a>
+            </button>
           )}
           <div className="border-b-2 border-color_gray w-full " />
           <a
             href="#order_body"
             className="flex__center space-x-5 self-start mt-[-30px] nav-hover"
-            onClick = {()=>navigate("/order")}
+            onClick={() => navigate("/order")}
           >
             <HiOutlineArrowNarrowLeft fontSize={25} />{" "}
             <h1>Continue shopping</h1>
