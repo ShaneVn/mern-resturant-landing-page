@@ -20,7 +20,7 @@ const Navbar = () => {
     navigate('/')
   }
 
-  console.log(user);
+
 
   return (
     <div

@@ -21,7 +21,7 @@ const SpecialMenu = () => {
   },[])
 
 
-  console.log(drink)
+  
 
 
 

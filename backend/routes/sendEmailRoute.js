@@ -16,12 +16,12 @@ const transporter = nodemailer.createTransport({
 sendEmailRoute.post(
   "/sendemail",
   expressAsyncHandler(async (req, res) => {
-    const { email, order, total, firstName } = await req.body;
+    const { email, order, total, firstName, orderId } = await req.body;
 
     const mailOptions = {
       from: "Shanelandingsender@hotmail.com",
       to: email,
-      subject: `Order is ready for ${firstName}`,
+      subject: `Order Number: ${orderId} is ready for ${firstName}`,
       text: `Thanks for Ordering with us! \nYour Orders:${order} \nYour Total:$${total}`,
     };
 

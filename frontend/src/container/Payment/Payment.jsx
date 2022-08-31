@@ -8,6 +8,7 @@ import PaymentTextInput from "../../components/TextInput/PaymentTextInput";
 import axios from "axios";
 import { toast } from "react-toastify";
 import displayError from "../../utils/displayError";
+import { GiConsoleController } from "react-icons/gi";
 
 function Payment() {
   const [cart, setCart] = useRecoilState(cartState);
@@ -36,14 +37,14 @@ function Payment() {
   const taxes = Math.round(totalBeforeTax * 0.0725 * 1e2) / 1e2;
 
   const orderTotalAfterTaxes = (taxes + totalBeforeTax).toFixed(2);
-  console.log(cart);
+ 
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       setIsloading(true);
 
-      await axios.post("/api/order", {
+     const {data} = await axios.post("/api/order", {
         orderItems: cart.map((x) => ({ ...x, total: x.price * x.quantity })),
         grandTotal: orderTotalAfterTaxes,
         user: user && user.user_id,
@@ -52,6 +53,7 @@ function Payment() {
         phone,
       });
 
+
       await axios.post("/api/email/sendemail", {
         email,
         order: itemList,
@@ -59,6 +61,7 @@ function Payment() {
         firstName,
         lastName,
         phone,
+        orderId: data.order._id
       });
       setIsloading(false);
       setEmail("");
@@ -66,12 +69,14 @@ function Payment() {
       setCart([]);
       setLastName("");
       setPhoneNumber("");
-      toast.success("Your order is placed, Please Check Your Email");
+      toast.success(`Your order ${data.order._id} is placed, Please Check Your Email`);
     } catch (err) {
       toast.error(displayError(err));
       setIsloading(false);
     }
   };
+
+  
 
   return (
     <form
