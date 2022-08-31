@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { cartState, loadingState } from "../../atoms/atoms";
+import { cartState, loadingState, userState } from "../../atoms/atoms";
 import { Button, CheckOutDetailsList, CheckOutItems } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
@@ -18,17 +18,47 @@ function Payment() {
   const [email, setEmail] = useState("");
   const [phone, setPhoneNumber] = useState("");
   const [orderId, setOrderId] = useState("");
+  const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {
     cart.length < 1 && navigate("/checkout");
   }, []);
 
+  const itemList = cart
+    .map((item) => `${item.name} x ${item.quantity}`)
+    .join(",");
+
+  const totalItems = cart.reduce((a, b) => a + b.quantity, 0);
+
+  const totalBeforeTax =
+    Math.round(cart.reduce((a, b) => a + b.quantity * b.price, 0) * 1e2) / 1e2;
+
+  const taxes = Math.round(totalBeforeTax * 0.0725 * 1e2) / 1e2;
+
+  const orderTotalAfterTaxes = (taxes + totalBeforeTax).toFixed(2);
+  console.log(cart);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       setIsloading(true);
+
+      await axios.post("/api/order", {
+        orderItems: cart.map((x) => ({ ...x, total: x.price * x.quantity })),
+        grandTotal: orderTotalAfterTaxes,
+        user: user && user.user_id,
+        firstName,
+        lastName,
+        phone,
+      });
+
       await axios.post("/api/email/sendemail", {
         email,
+        order: itemList,
+        total: orderTotalAfterTaxes,
+        firstName,
+        lastName,
+        phone,
       });
       setIsloading(false);
       setEmail("");
@@ -42,17 +72,6 @@ function Payment() {
       setIsloading(false);
     }
   };
-
-  console.log(orderId);
-
-  const totalItems = cart.reduce((a, b) => a + b.quantity, 0);
-
-  const totalBeforeTax =
-    Math.round(cart.reduce((a, b) => a + b.quantity * b.price, 0) * 1e2) / 1e2;
-
-  const taxes = Math.round(totalBeforeTax * 0.0725 * 1e2) / 1e2;
-
-  const orderTotalAfterTaxes = (taxes + totalBeforeTax).toFixed(2);
 
   return (
     <form
@@ -69,19 +88,22 @@ function Payment() {
           <PaymentTextInput
             placeholder={"First Name"}
             setInPutValue={setFirstname}
+            type="text"
           />
           <PaymentTextInput
             placeholder={"Last Name"}
             setInPutValue={setLastName}
+            type="text"
           />
           <PaymentTextInput
             placeholder={"Email"}
             setInPutValue={setEmail}
-            email
+            type="email"
           />
           <PaymentTextInput
             placeholder={"Phone Number"}
             setInPutValue={setPhoneNumber}
+            type="number"
           />
         </div>
 
@@ -111,7 +133,7 @@ function Payment() {
           <a
             href="#order_body"
             className="flex__center space-x-5 self-start mt-[-30px] nav-hover"
-            onClick={()=>navigate('/checkout')}
+            onClick={() => navigate("/checkout")}
           >
             <HiOutlineArrowNarrowLeft fontSize={25} /> <h1>Go Back To Cart</h1>
           </a>

@@ -9,6 +9,7 @@ const product = require("./data.js");
 const userRoute = require("./routes/userRoute.js");
 const seedRouter = require("./routes/seedRoute.js")
 const sendEmailRoute = require("./routes/sendEmailRoute.js")
+const orderRoute = require("./routes/orderRoute.js")
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -35,6 +36,9 @@ app.get("/api/product", (req, res) => {
 app.use('/api/seed', seedRouter);
 app.use("/api/users", userRoute);
 app.use("/api/email", sendEmailRoute);
+app.use("/api/order", orderRoute)
+
+// handle custom error message or when throw new Error('') for debugging 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
