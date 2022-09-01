@@ -14,6 +14,11 @@ export const modalState = atom({
   default: false,
 });
 
+export const orderNumberState = atom({
+  key: "orderNumberStateKey",
+  default: false,
+});
+
 export const loadingState = atom({
   key: "loadingStateKey",
   default: false,

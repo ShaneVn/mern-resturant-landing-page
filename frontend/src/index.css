@@ -7,7 +7,7 @@
 
 @layer components {
   .nav-hover {
-    @apply hover:text-color_golden duration-200 ease-in transition;
+    @apply hover:text-color_golden duration-200 ease-in transition cursor-pointer;
   }
 
   .section-title {

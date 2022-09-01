@@ -8,7 +8,7 @@ import PaymentTextInput from "../../components/TextInput/PaymentTextInput";
 import axios from "axios";
 import { toast } from "react-toastify";
 import displayError from "../../utils/displayError";
-import { GiConsoleController } from "react-icons/gi";
+import { orderNumberState } from "../../atoms/atoms";
 
 function Payment() {
   const [cart, setCart] = useRecoilState(cartState);
@@ -18,12 +18,10 @@ function Payment() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhoneNumber] = useState("");
-  const [orderId, setOrderId] = useState("");
   const [user, setUser] = useRecoilState(userState);
+  const [orderNumber, setOrderNumber] = useRecoilState(orderNumberState);
 
-  useEffect(() => {
-    cart.length < 1 && navigate("/checkout");
-  }, []);
+  
 
   const itemList = cart
     .map((item) => `${item.name} x ${item.quantity}`)
@@ -37,14 +35,13 @@ function Payment() {
   const taxes = Math.round(totalBeforeTax * 0.0725 * 1e2) / 1e2;
 
   const orderTotalAfterTaxes = (taxes + totalBeforeTax).toFixed(2);
- 
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       setIsloading(true);
 
-     const {data} = await axios.post("/api/order", {
+      const { data } = await axios.post("/api/order", {
         orderItems: cart.map((x) => ({ ...x, total: x.price * x.quantity })),
         grandTotal: orderTotalAfterTaxes,
         user: user && user.user_id,
@@ -53,7 +50,6 @@ function Payment() {
         phone,
       });
 
-
       await axios.post("/api/email/sendemail", {
         email,
         order: itemList,
@@ -61,22 +57,18 @@ function Payment() {
         firstName,
         lastName,
         phone,
-        orderId: data.order._id
+        orderId: data.order._id,
       });
       setIsloading(false);
-      setEmail("");
-      setFirstname("");
+
       setCart([]);
-      setLastName("");
-      setPhoneNumber("");
-      toast.success(`Your order ${data.order._id} is placed, Please Check Your Email`);
+      setOrderNumber(data.order._id);
+      navigate("/payment/paymentsuccess");
     } catch (err) {
       toast.error(displayError(err));
       setIsloading(false);
     }
   };
-
-  
 
   return (
     <form
@@ -126,10 +118,7 @@ function Payment() {
           />
 
           {cart.length > 0 && (
-            <button
-              className="bg-[#FFA41C] relative group  py-3 flex__center font-medium w-full rounded-lg text-color_black cursor-pointer "
-              onClick={() => navigate("/payment")}
-            >
+            <button className="bg-[#FFA41C] relative group  py-3 flex__center font-medium w-full rounded-lg text-color_black cursor-pointer ">
               <div className="absolute inset-0 bg-color_black  duration-300 ease-in-out opacity-0 group-hover:opacity-30 w-full h-full" />
               Place Order
             </button>

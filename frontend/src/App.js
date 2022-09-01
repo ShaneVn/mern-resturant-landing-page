@@ -23,7 +23,7 @@ import {
   CheckOut,
   Signin,
 } from "./container";
-import { Navbar } from "./components";
+import { Navbar, PaymentSuccess } from "./components";
 import { loadingState } from "./atoms/atoms";
 import { useRecoilState } from "recoil";
 import "./App.css";
@@ -149,6 +149,12 @@ const App = () => {
                 </>
               )
             }
+          />
+
+          <Route
+            exact
+            path="/payment/paymentsuccess"
+            element={<PaymentSuccess />}
           />
 
           <Route
