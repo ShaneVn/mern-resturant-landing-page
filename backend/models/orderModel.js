@@ -18,7 +18,9 @@ const orderSchema = new mongoose.Schema(
     },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    phone:{type:Number, require:true}
+    phone:{type:Number, require:true},
+    loginEmail:{type:String},
+    contactEmail:{type:String}
   },
   {
     timestamps: true,

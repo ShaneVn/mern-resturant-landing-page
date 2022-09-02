@@ -128,7 +128,9 @@ const Navbar = () => {
           <div className="cursor-pointer  relative group  ">
             {" "}
             <p className="nav-hover">Hello {user.name}</p>
-            <div className="bg-color_black rounded-lg absolute  w-[150px] p-3 flex flex-col text-white text-lg opacity-0 group-hover:opacity-100 duration-1000 ease-in-out">
+            <div 
+            onClick={()=>navigate("/orderhistory")}
+            className="bg-color_black rounded-lg absolute  w-[150px] p-3 flex flex-col text-white text-lg opacity-0 group-hover:opacity-100 duration-1000 ease-in-out">
                 <p className="mb-3 nav-hover" onClick={handleSignOut}>Sign out </p>
                 <p className="nav-hover">Order History</p>
             </div>

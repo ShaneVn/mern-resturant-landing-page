@@ -44,7 +44,9 @@ function Payment() {
       const { data } = await axios.post("/api/order", {
         orderItems: cart.map((x) => ({ ...x, total: x.price * x.quantity })),
         grandTotal: orderTotalAfterTaxes,
-        user: user && user.user_id,
+        user: user && user._id,
+        loginEmail: user && user.email,
+        contactEmail: email,
         firstName,
         lastName,
         phone,

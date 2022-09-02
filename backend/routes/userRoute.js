@@ -3,7 +3,7 @@ const express = require("express");
 const expressAsyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const bycrypt = require("bcryptjs");
-const generateToken = require("../utils.js");
+const utils = require("../utils.js");
 
 const userRoute = express.Router();
 
@@ -18,7 +18,7 @@ userRoute.post(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
-          token: generateToken(user),
+          token: utils.generateToken(user),
         });
         return;
       }
@@ -49,7 +49,7 @@ userRoute.post(
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: generateToken(user),
+      token: utils.generateToken(user),
     });
   })
 );

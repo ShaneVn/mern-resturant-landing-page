@@ -4,6 +4,7 @@ import IfUserSignIn from "./utils/IfUserSignIn";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import {
+  PaymentSuccess,
   Payment,
   OrderHistory,
   AboutUs,
@@ -23,7 +24,7 @@ import {
   CheckOut,
   Signin,
 } from "./container";
-import { Navbar, PaymentSuccess } from "./components";
+import { Navbar } from "./components";
 import { loadingState } from "./atoms/atoms";
 import { useRecoilState } from "recoil";
 import "./App.css";
@@ -164,7 +165,6 @@ const App = () => {
               <>
                 <Navbar />
                 <OrderHistory />
-                <Footer />
               </>
             }
           />

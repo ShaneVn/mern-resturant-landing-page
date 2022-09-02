@@ -16,9 +16,11 @@ import OrderHistory from './OrderHistory/OrderHistory';
 import Payment from './Payment/Payment';
 import Signin from "./Signin/Signin"
 import CheckOut from './CheckOut/CheckOut';
+import  PaymentSuccess  from './PaymentSuccess/PaymentSuccess';
 
 
 export {
+  PaymentSuccess,
   CheckOut,
   Signin,
   Payment,
