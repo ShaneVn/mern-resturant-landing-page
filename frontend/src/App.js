@@ -159,7 +159,7 @@ const App = () => {
 
           <Route
             exact
-            path="/orderhistory/:id"
+            path="/orderhistory"
             element={
               <>
                 <Navbar />

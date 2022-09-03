@@ -1,12 +1,16 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import ReactPaginate from "react-paginate";
+import "./Pagination.css"
+
 
 function Pagination({
   orderPerPage,
   totalOrders,
   setCurrentPage,
   currentPage,
+  setItemOffset,
 }) {
   const numberOfPages = [];
   const navigate = useNavigate();
@@ -20,17 +24,20 @@ function Pagination({
     setCurrentPage(id)
   },[])
 
-  const handleClick = (num) => {
-    setCurrentPage(num)
-    navigate(`/orderhistory/${num}`)
+  const handleClick = (event) => {
+    const newOffset = (event.selected * orderPerPage) % numberOfPages.length;
+    console.log(event.selected)
+    setItemOffset(newOffset);
     
   };
 
+
+  
  
 
   return (
-    <div>
-      <ul className="flex__center mt-10">
+    <div className="mt-12">
+      {/* <ul className="flex__center mt-10">
         {numberOfPages.map((num) => (
           <li
             key={num}
@@ -43,7 +50,27 @@ function Pagination({
             {num}
           </li>
         ))}
-      </ul>
+      </ul> */}
+
+<ReactPaginate
+        previousLabel={"<"}
+        nextLabel={">"}
+        breakLabel={"..."}
+        pageCount={numberOfPages.length}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+        onPageChange={handleClick}
+        containerClassName={"pagination justify-content-center"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
+        breakClassName={"page-item"}
+        breakLinkClassName={"page-link"}
+        activeClassName={"active"}
+      />
     </div>
   );
 }

@@ -13,13 +13,14 @@ function OrderHistory() {
   const [user, setUser] = useRecoilState(userState);
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
-  const [orderPerPage, setOrderPerPage] = useState(1);
+  const [orderPerPage, setOrderPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemOffset, setItemOffset] = useState(0)
 
   // orders for current page
-  const indexOfLastOrder = currentPage * orderPerPage;
-  const indexOfFirstOrder = indexOfLastOrder - orderPerPage;
-  const currentOrder = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+  const endOffset = itemOffset + orderPerPage;
+  
+  const currentOrder = orders.slice(itemOffset, endOffset);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +40,8 @@ function OrderHistory() {
     };
     fetchData();
   }, []);
+
+ 
 
   if (isloading) {
     return <Loading />;
@@ -88,7 +91,7 @@ function OrderHistory() {
           </tbody>
         </table>
         <Pagination orderPerPage={orderPerPage}  totalOrders={orders.length}
-        currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+        currentPage={currentPage} setCurrentPage={setCurrentPage} setItemOffset={setItemOffset}/>
       </div>
     </div>
   );
