@@ -5,10 +5,13 @@ import Button from "./Button/Button"
 import OrderItem from './OrderItem/OrderItem';
 import CheckOutItems from './CheckOutItems/CheckOutItems';
 import CheckOutDetailsList from './CheckOutDetailsList/CheckOutDetailsList';
+import Loading from './Loading/Loading';
+import Pagination from './Pagination/Pagination';
 
 
 export {
- 
+  Pagination,
+  Loading,
   CheckOutDetailsList,
   CheckOutItems,
   SubHeading,

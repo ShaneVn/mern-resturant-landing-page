@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { cartState, loadingState, userState } from "../../atoms/atoms";
-import { Button, CheckOutDetailsList, CheckOutItems } from "../../components";
+import { Button, CheckOutDetailsList, CheckOutItems, Loading } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import PaymentTextInput from "../../components/TextInput/PaymentTextInput";
@@ -71,6 +71,8 @@ function Payment() {
       setIsloading(false);
     }
   };
+
+  // if(isloading){return <Loading/>}
 
   return (
     <form

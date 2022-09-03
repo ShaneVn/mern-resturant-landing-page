@@ -24,11 +24,10 @@ import {
   CheckOut,
   Signin,
 } from "./container";
-import { Navbar } from "./components";
+import { Navbar, Loading } from "./components";
 import { loadingState } from "./atoms/atoms";
 import { useRecoilState } from "recoil";
 import "./App.css";
-import Loading from "./components/Loading/Loading";
 
 const App = () => {
   const [isloading, setIsloading] = useRecoilState(loadingState);
@@ -160,11 +159,11 @@ const App = () => {
 
           <Route
             exact
-            path="/orderhistory"
+            path="/orderhistory/:id"
             element={
               <>
                 <Navbar />
-                <OrderHistory />
+                <OrderHistory />{" "}
               </>
             }
           />
