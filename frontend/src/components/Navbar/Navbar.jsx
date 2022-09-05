@@ -125,7 +125,7 @@ const Navbar = () => {
         {user ? (
           <div className="cursor-pointer  relative group  ">
             {" "}
-            <p className="nav-hover">Hello {user.name}</p>
+            <p className="nav-hover">Hello {user.name[0].toUpperCase() + user.name.slice(1)}</p>
             <div className="bg-color_black space-y-3 rounded-lg absolute  w-[150px] p-3 flex flex-col text-white text-lg opacity-0 group-hover:opacity-100 duration-1000 ease-in-out">
               <p
                 className=" nav-hover "

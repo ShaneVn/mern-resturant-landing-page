@@ -25,7 +25,7 @@ orderRoute.post("/", expressAsyncHandler(async(req,res)=>{
 }))
 
 orderRoute.get("/history", utils.isAuth, expressAsyncHandler(async(req,res)=>{
-    const orderHistory = await Order.find({user: req.user._id})
+    const orderHistory = await Order.find({user: req.user._id}).sort({_id:-1})
     res.send(orderHistory)
 }))
 
