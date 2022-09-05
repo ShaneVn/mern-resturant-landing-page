@@ -135,7 +135,7 @@ function Payment() {
             type="number"
           />
  
-          <div className="w-full sm:w-[60%] text-lg self-start self">
+          <div className="w-full sm:w-[60%] self-start self">
             <p className=" checkout-text mb-5">Card Details:</p>
             <div className=" border-[1px] border-color_gray p-5 rounded-[5px]">
               <CardElement
@@ -157,7 +157,7 @@ function Payment() {
             </div>
           </div>
           <p className="checkout-text mt-12 text-lg">
-            This is a stripe test mode, please card number 4242 4242 4242 4242
+            This is in stripe test mode, please use card number 4242 4242 4242 4242
             to stimulate a real transcation
           </p>
         </div>
