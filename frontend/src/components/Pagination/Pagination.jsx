@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-import "./Pagination.css"
-
+import "./Pagination.css";
 
 function Pagination({
   orderPerPage,
@@ -20,20 +19,17 @@ function Pagination({
     numberOfPages.push(i);
   }
 
-  useEffect(()=>{
-    setCurrentPage(id)
-  },[])
+  useEffect(() => {
+    const newOffset = (id-1) * orderPerPage;
+    setItemOffset(newOffset);
+  }, []);
 
   const handleClick = (event) => {
-    const newOffset = (event.selected * orderPerPage) % numberOfPages.length;
-    console.log(event.selected)
+    const newOffset = event.selected * orderPerPage;
+    console.log(event.selected);
     setItemOffset(newOffset);
-    
+    navigate(`/orderhistory/${event.selected + 1}`)
   };
-
-
-  
- 
 
   return (
     <div className="mt-12">
@@ -52,7 +48,7 @@ function Pagination({
         ))}
       </ul> */}
 
-<ReactPaginate
+      <ReactPaginate
         previousLabel={"<"}
         nextLabel={">"}
         breakLabel={"..."}

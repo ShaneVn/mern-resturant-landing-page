@@ -33,7 +33,7 @@ function PaymentSuccess() {
           onClick={() => navigate("/order")}
         >
           <HiOutlineArrowNarrowLeft fontSize={25} />{" "}
-          <h1 className="ml-5">Go Back To Shopping</h1>{" "}
+          <h1 className="ml-5">Back To Menu</h1>{" "}
         </div>
       </div>
 

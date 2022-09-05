@@ -15,12 +15,10 @@ const Navbar = () => {
   const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
 
-  const handleSignOut = () =>{
-    setUser(null)
-    navigate('/')
-  }
-
-
+  const handleSignOut = () => {
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <div
@@ -128,11 +126,17 @@ const Navbar = () => {
           <div className="cursor-pointer  relative group  ">
             {" "}
             <p className="nav-hover">Hello {user.name}</p>
-            <div 
-            onClick={()=>navigate("/orderhistory")}
-            className="bg-color_black rounded-lg absolute  w-[150px] p-3 flex flex-col text-white text-lg opacity-0 group-hover:opacity-100 duration-1000 ease-in-out">
-                <p className="mb-3 nav-hover" onClick={handleSignOut}>Sign out </p>
-                <p className="nav-hover">Order History</p>
+            <div className="bg-color_black space-y-3 rounded-lg absolute  w-[150px] p-3 flex flex-col text-white text-lg opacity-0 group-hover:opacity-100 duration-1000 ease-in-out">
+              <p
+                className=" nav-hover "
+                onClick={() => navigate("/orderhistory/1")}
+              >
+                Order History
+              </p>
+              {/* <div className="border-b-[1px] border-color_gray w-full " /> */}
+              <p className=" nav-hover" onClick={handleSignOut}>
+                Sign out{" "}
+              </p>
             </div>
           </div>
         ) : (

@@ -137,17 +137,11 @@ const App = () => {
             exact
             path="/payment"
             element={
-              isloading ? (
-                <>
-                  <Loading />
-                </>
-              ) : (
-                <>
-                  <Navbar />
-                  <Payment />
-                  <Footer />
-                </>
-              )
+              <>
+                <Navbar />
+                <Payment />
+                <Footer />
+              </>
             }
           />
 
@@ -159,7 +153,7 @@ const App = () => {
 
           <Route
             exact
-            path="/orderhistory"
+            path="/orderhistory/:id"
             element={
               <>
                 <Navbar />
