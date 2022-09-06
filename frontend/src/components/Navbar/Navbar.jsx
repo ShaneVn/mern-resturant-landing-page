@@ -80,17 +80,6 @@ const Navbar = () => {
               >
                 <RiShoppingCartFill fontSize={35} />
               </a>
-              {/* <div
-                className="bg-white opacity-0 peer-hover:opacity-100 flex__center
-              group-hover:flex__center w-[150px] h-[50px] absolute
-               top-[50px] right-[-70px] rounded-xl duration-1000 ease-in-out"
-              >
-                {" "}
-                <h1 className="body-text text-color_black font-cormorant text-[20px] font-medium">
-                  You have {cart.reduce((a, c) => a + c.quantity, 0)}
-                  <span>{cart.length > 1 ? "items" : "item"}</span>
-                </h1>
-              </div> */}
             </div>
           ) : (
             <div className="relative">
@@ -101,15 +90,6 @@ const Navbar = () => {
               >
                 <RiShoppingCartLine fontSize={35} />
               </a>
-              {/* <div
-                className="bg-white opacity-0 peer-hover:opacity-100 flex__center
-          group-hover:flex__center w-[150px] h-[50px] absolute
-           top-[50px] right-[-70px] rounded-xl duration-1000 ease-in-out"
-              >
-                <h1 className="body-text text-color_black font-cormorant text-[20px] font-medium">
-                  No item in Cart
-                </h1>
-              </div> */}
             </div>
           )}
         </div>
@@ -125,7 +105,9 @@ const Navbar = () => {
         {user ? (
           <div className="cursor-pointer  relative group  ">
             {" "}
-            <p className="nav-hover">Hello {user.name[0].toUpperCase() + user.name.slice(1)}</p>
+            <p className="nav-hover">
+              Hello {user.name[0].toUpperCase() + user.name.slice(1)}
+            </p>
             <div className="bg-color_black space-y-3 rounded-lg absolute  w-[150px] p-3 flex flex-col text-white text-lg opacity-0 group-hover:opacity-100 duration-1000 ease-in-out">
               <p
                 className=" nav-hover "
@@ -150,8 +132,35 @@ const Navbar = () => {
         )}
       </div>
 
-      <div className="lg:hidden flex items-center nav-hover cursor-pointer">
-        <GiHamburgerMenu fontSize={27} onClick={() => setIsToggle(true)} />
+      <div className="lg:hidden flex items-center cursor-pointer">
+        {cart.length > 0 ? (
+          <div className="relative sm:hidden">
+            <div className="absolute w-6 h-6 top-[-10px] right-[-10px] rounded-full bg-[#F08804] flex__center">
+              <h2 className="text-color_black font-semibold font-ubuntu">
+                {cart.reduce((a, b) => a + b.quantity, 0)}
+              </h2>
+            </div>
+            <a
+              className="nav-hover peer cursor-pointer"
+              onClick={() => navigate("/checkout")}
+              href="#checkout"
+            >
+              <RiShoppingCartFill fontSize={35} />
+            </a>
+          </div>
+        ) : (
+          <div className="relative">
+            <a
+              className="cursor-pointer peer nav-hover"
+              onClick={() => navigate("/checkout")}
+              href="#checkout"
+            >
+              <RiShoppingCartLine fontSize={35} />
+            </a>
+          </div>
+        )}
+        <div className="nav-hover ml-6">
+        <GiHamburgerMenu fontSize={27} onClick={() => setIsToggle(true)} /> </div>
       </div>
 
       {isToggle && (
@@ -178,11 +187,12 @@ const Navbar = () => {
                 Order
               </a>
             </li>
-            <li className="" onClick={() => navigate("/checkout")}>
-              <a className="nav-hover" href="#checkout">
-                CheckOut
+           { !user &&
+            <li className="" onClick={() => navigate("/signin")}>
+              <a className="nav-hover" href="">
+                Signin
               </a>
-            </li>
+            </li>  }
             <li className="" onClick={() => navigate("/")}>
               <a className="nav-hover" href="#about">
                 About
