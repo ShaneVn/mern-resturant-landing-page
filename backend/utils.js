@@ -12,7 +12,7 @@ const jwt = require("jsonwebtoken");
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "30s",
+      expiresIn: "30d",
     }
   );
 };
