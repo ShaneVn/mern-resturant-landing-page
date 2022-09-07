@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs/dist/bcrypt");
 const express = require("express");
 const expressAsyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
-const bycrypt = require("bcryptjs");
 const utils = require("../utils.js");
 
 const userRoute = express.Router();
@@ -34,7 +33,6 @@ userRoute.post(
 
     if (checkUser) {
       res.status(400).send({ message: "Email Already Exist" });
-
       return;
     }
 

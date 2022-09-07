@@ -53,7 +53,7 @@ app.use("/api/users", userRoute);
 app.use("/api/email", sendEmailRoute);
 app.use("/api/order", orderRoute);
 
-// handle custom error message or when throw new Error('') for debugging
+
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });

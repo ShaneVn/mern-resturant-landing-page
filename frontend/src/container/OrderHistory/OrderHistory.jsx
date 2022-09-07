@@ -5,8 +5,7 @@ import { loadingState, userState } from "../../atoms/atoms";
 import displayError from "../../utils/displayError";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { Loading , Pagination } from "../../components";
-
+import { Loading, Pagination } from "../../components";
 
 function OrderHistory() {
   const [isloading, setIsloading] = useRecoilState(loadingState);
@@ -15,14 +14,19 @@ function OrderHistory() {
   const navigate = useNavigate();
   const [orderPerPage, setOrderPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemOffset, setItemOffset] = useState(0)
+  const [itemOffset, setItemOffset] = useState(0);
 
   // orders for current page
   const endOffset = itemOffset + orderPerPage;
-  
+
   const currentOrder = orders.slice(itemOffset, endOffset);
 
   useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+      return;
+    }
+
     const fetchData = async () => {
       setIsloading(true);
       try {
@@ -33,15 +37,14 @@ function OrderHistory() {
         setOrders(data);
         setIsloading(false);
       } catch (error) {
-        navigate("/");
-        console.log(displayError(error));
         setIsloading(false);
+        toast.error(displayError(error));
+        setUser(null);
+        navigate("/signin");
       }
     };
     fetchData();
   }, []);
-
- 
 
   if (isloading) {
     return <Loading />;
@@ -83,15 +86,22 @@ function OrderHistory() {
                 >
                   {order._id}
                 </th>
-                <td className="py-4 px-6">{order.createdAt.substring(0, 10)}</td>
+                <td className="py-4 px-6">
+                  {order.createdAt.substring(0, 10)}
+                </td>
                 <td className="py-4 px-6">${order.grandTotal.toFixed(2)}</td>
                 <td className="py-4 px-6">Details</td>
               </tr>
             ))}
           </tbody>
         </table>
-        <Pagination orderPerPage={orderPerPage}  totalOrders={orders.length}
-        currentPage={currentPage} setCurrentPage={setCurrentPage} setItemOffset={setItemOffset}/>
+        <Pagination
+          orderPerPage={orderPerPage}
+          totalOrders={orders.length}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          setItemOffset={setItemOffset}
+        />
       </div>
     </div>
   );

@@ -160,7 +160,8 @@ const Navbar = () => {
           </div>
         )}
         <div className="nav-hover ml-6">
-        <GiHamburgerMenu fontSize={27} onClick={() => setIsToggle(true)} /> </div>
+          <GiHamburgerMenu fontSize={27} onClick={() => setIsToggle(true)} />{" "}
+        </div>
       </div>
 
       {isToggle && (
@@ -187,12 +188,13 @@ const Navbar = () => {
                 Order
               </a>
             </li>
-           { !user &&
-            <li className="" onClick={() => navigate("/signin")}>
-              <a className="nav-hover" href="">
-                Signin
-              </a>
-            </li>  }
+            {!user && (
+              <li className="" onClick={() => navigate("/signin")}>
+                <a className="nav-hover" href="">
+                  Signin
+                </a>
+              </li>
+            )}
             <li className="" onClick={() => navigate("/")}>
               <a className="nav-hover" href="#about">
                 About
@@ -213,6 +215,11 @@ const Navbar = () => {
                 Contact
               </a>
             </li>
+            {user && (
+              <li className="" onClick={handleSignOut}>
+                Signout
+              </li>
+            )}
           </ul>
         </div>
       )}
