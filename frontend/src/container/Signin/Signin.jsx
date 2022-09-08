@@ -76,11 +76,11 @@ function Signin() {
           </button>
         </form>
 
-        {error && (
+        {/* {error && (
           <div>
             <p className="mb-5 text-[#FF9494] ">{error}</p>
           </div>
-        )}
+        )} */}
         <p className="text-[#b2becd]">
           Don' have an Account?{" "}
           <span

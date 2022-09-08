@@ -21,6 +21,7 @@ function NewPassword() {
 
     if (password !== confirmpassword) {
       toast.error("password not matched");
+      return
     }
 
       try {
