@@ -3,8 +3,18 @@ const express = require("express");
 const expressAsyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const utils = require("../utils.js");
+const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 
 const userRoute = express.Router();
+
+const transporter = nodemailer.createTransport({
+  service: "Hotmail",
+  auth: {
+    user: "Shanelandingsender@hotmail.com",
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 userRoute.post(
   "/signin",
@@ -49,6 +59,71 @@ userRoute.post(
       isAdmin: user.isAdmin,
       token: utils.generateToken(user),
     });
+  })
+);
+
+userRoute.post(
+  "/reset-password",
+  expressAsyncHandler(async (req, res) => {
+    const token = crypto.randomBytes(60).toString("hex");
+
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return res
+        .status(401)
+        .send({ message: "user does not exist with that email" });
+    }
+
+    user.resetToken = token;
+    user.expireToken = Date.now() + 1800000;
+    await user.save();
+
+    transporter.sendMail(
+      {
+        from: "Shanelandingsender@hotmail.com",
+        to: user.email,
+        subject: "password reset",
+        html: `
+        <p>You have requested for password reset</p>
+        <h3>click on this <a href="https://restaurant-landing-page-shane.herokuapp.com/resetpassword/${token}">link</a> to reset password </h3>`,
+      },
+      (error) => {
+        if (error) {
+          return res.send(error);
+        } else {
+          return res.status(200).send({ message: "Mail send" });
+        }
+      }
+    );
+  })
+);
+
+userRoute.post(
+  "/new-password",
+  expressAsyncHandler(async (req, res) => {
+    const newPassword = req.body.password;
+    const token = req.body.token;
+    const user = await User.findOne({
+      resetToken: token,
+      expireToken: { $gt: Date.now() },
+    });
+    if (!user) {
+      return res
+        .status(422)
+        .send({ message: "Session has expired, please try again" });
+    } else if (bcrypt.compareSync(newPassword, user.password)) {
+      return res
+        .status(422)
+        .send({ message: "You can't use the same password as the last one" });
+    } else {
+      user.password = bcrypt.hashSync(newPassword);
+      user.resetToken = undefined;
+      user.expireToken = undefined;
+
+      await user.save();
+
+      return res.status(200).send({ message: "password has been reset" });
+    }
   })
 );
 

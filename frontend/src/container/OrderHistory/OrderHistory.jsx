@@ -5,7 +5,7 @@ import { loadingState, userState } from "../../atoms/atoms";
 import displayError from "../../utils/displayError";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { Loading, Pagination } from "../../components";
+import { Loading, PaginationContainer } from "../../components";
 
 function OrderHistory() {
   const [isloading, setIsloading] = useRecoilState(loadingState);
@@ -44,7 +44,7 @@ function OrderHistory() {
       }
     };
     fetchData();
-  }, []);
+  }, [navigate]);
 
   if (isloading) {
     return <Loading />;
@@ -95,7 +95,7 @@ function OrderHistory() {
             ))}
           </tbody>
         </table>
-        <Pagination
+        <PaginationContainer
           orderPerPage={orderPerPage}
           totalOrders={orders.length}
           currentPage={currentPage}

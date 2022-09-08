@@ -111,7 +111,7 @@ const Navbar = () => {
             <div className="bg-color_black space-y-3 rounded-lg absolute  w-[150px] p-3 flex flex-col text-white text-lg opacity-0 group-hover:opacity-100 duration-1000 ease-in-out">
               <p
                 className=" nav-hover "
-                onClick={() => navigate("/orderhistory/1")}
+                onClick={() => navigate("/orderhistory")}
               >
                 Order History
               </p>

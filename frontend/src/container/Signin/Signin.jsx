@@ -48,7 +48,7 @@ function Signin() {
         >
           <p className="mb-3">Email</p>
           <input
-            type="text"
+            type="email"
             className="p-3 pl-[54px] bg-[#454e56] rounded-[5rem] outline-none  "
             placeholder="Email"
             required
@@ -91,6 +91,14 @@ function Signin() {
             Sign Up
           </span>
         </p>
+
+        <p
+            className="cursor-pointer text-[#3E73CE] nav-hover mt-4"
+            onClick={() => navigate("/resetpassword")}
+          >
+            {" "}
+            Forgot Password 
+          </p>
       </div>
     </div>
   );

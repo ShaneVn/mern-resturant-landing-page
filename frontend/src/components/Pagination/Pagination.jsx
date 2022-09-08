@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+// import { useParams } from "react-router-dom";
 import "./Pagination.css";
 
 function Pagination({
@@ -13,22 +13,29 @@ function Pagination({
 }) {
   const numberOfPages = [];
   const navigate = useNavigate();
-  const { id } = useParams();
+  // const { id } = useParams()
+
+
+  // useEffect(() => {
+  //   const newOffset = (id-1) * orderPerPage;
+  //   setItemOffset(newOffset);
+  // }, []);
+
+
+
+
+
 
   for (let i = 1; i <= Math.ceil(totalOrders / orderPerPage); i++) {
     numberOfPages.push(i);
   }
 
-  useEffect(() => {
-    const newOffset = (id-1) * orderPerPage;
-    setItemOffset(newOffset);
-  }, []);
+
 
   const handleClick = (event) => {
     const newOffset = event.selected * orderPerPage;
-    console.log(event.selected);
     setItemOffset(newOffset);
-    navigate(`/orderhistory/${event.selected + 1}`)
+    
   };
 
   return (
@@ -66,6 +73,7 @@ function Pagination({
         breakClassName={"page-item"}
         breakLinkClassName={"page-link"}
         activeClassName={"active"}
+        // currentPage={6}
       />
     </div>
   );

@@ -23,6 +23,8 @@ import {
   Signup,
   CheckOut,
   Signin,
+  ResetPasswordWithEmail,
+  NewPassword,
 } from "./container";
 import { Navbar, Loading } from "./components";
 import { loadingState } from "./atoms/atoms";
@@ -119,6 +121,28 @@ const App = () => {
 
           <Route
             exact
+            path="/resetpassword"
+            element={
+              <>
+                <Navbar />
+                <ResetPasswordWithEmail />
+              </>
+            }
+          />
+          
+          <Route
+            exact
+            path="/resetpassword/:token"
+            element={
+              <>
+                <Navbar />
+                <NewPassword />
+              </>
+            }
+          />
+
+          <Route
+            exact
             path="/location"
             element={
               isloading ? (
@@ -153,7 +177,7 @@ const App = () => {
 
           <Route
             exact
-            path="/orderhistory/:id"
+            path="/orderhistory"
             element={
               <>
                 <Navbar />

@@ -17,9 +17,13 @@ import Payment from './Payment/Payment';
 import Signin from "./Signin/Signin"
 import CheckOut from './CheckOut/CheckOut';
 import  PaymentSuccess  from './PaymentSuccess/PaymentSuccess';
+import ResetPasswordWithEmail from './ResetPassword/ResetPasswordWithEmail';
+import NewPassword from './NewPassword/NewPassword';
 
 
 export {
+  NewPassword,
+  ResetPasswordWithEmail,
   PaymentSuccess,
   CheckOut,
   Signin,
