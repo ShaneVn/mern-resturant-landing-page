@@ -10,7 +10,7 @@ function OrderItem({ desc, image, name, price, alt, id }) {
 
   const addItmesToCart = () => {
     const currentItemIndex = cart.findIndex((item) => item.id === id);
-    toast.success("You Have Add An Item To Cart")
+    toast.success("You Have Add An Item To Cart",{toastId: "addItmesToCart"})
     if (currentItemIndex >= 0) {
       setCart((cart) =>
         cart.map((item) => {

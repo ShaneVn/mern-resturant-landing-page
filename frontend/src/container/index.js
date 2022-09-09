@@ -19,9 +19,11 @@ import CheckOut from './CheckOut/CheckOut';
 import  PaymentSuccess  from './PaymentSuccess/PaymentSuccess';
 import ResetPasswordWithEmail from './ResetPassword/ResetPasswordWithEmail';
 import NewPassword from './NewPassword/NewPassword';
+import AccountActivation from './AccountActivation/AccountActivation';
 
 
 export {
+  AccountActivation,
   NewPassword,
   ResetPasswordWithEmail,
   PaymentSuccess,

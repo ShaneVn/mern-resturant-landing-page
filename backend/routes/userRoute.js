@@ -16,11 +16,45 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+const sendMailForActivation = (user, token) => {
+  transporter.sendMail(
+    {
+      from: "Shanelandingsender@hotmail.com",
+      to: user.email,
+      subject: "Account Activation",
+      html: `
+      <p>You have requested for account activation</p>
+      <h3>click on this <a href="https://restaurant-landing-page-shane.herokuapp.com/activation/${token}">link</a> to reset password </h3>`,
+    },
+    (error) => {
+      if (error) {
+        return res.send(error);
+      } else {
+        return res.status(200).send({ message: "Mail send" });
+      }
+    }
+  );
+};
+
 userRoute.post(
   "/signin",
   expressAsyncHandler(async (req, res) => {
+    const token = crypto.randomBytes(60).toString("hex");
     const user = await User.findOne({ email: req.body.email });
     if (user) {
+      if (user.verified === false) {
+
+        user.activateToken = token
+        user.activateExpireToken = Date.now() + 1800000
+
+        await user.save()
+        sendMailForActivation(user, token);
+
+        return res.status(401).send({
+          message:
+            "A link has sent to your email, please verify your account first",
+        });
+      }
       if (bcrypt.compareSync(req.body.password, user.password)) {
         res.send({
           _id: user._id,
@@ -40,7 +74,7 @@ userRoute.post(
   "/signup",
   expressAsyncHandler(async (req, res) => {
     const checkUser = await User.findOne({ email: req.body.email });
-
+    const token = crypto.randomBytes(60).toString("hex");
     if (checkUser) {
       res.status(400).send({ message: "Email Already Exist" });
       return;
@@ -50,8 +84,13 @@ userRoute.post(
       name: req.body.name,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
+      activateToken: token,
+      activateExpireToken: Date.now() + 1800000
     });
     const user = await newUser.save();
+
+    sendMailForActivation(user, token);
+
     res.send({
       _id: user._id,
       name: user.name,
@@ -123,6 +162,30 @@ userRoute.post(
       await user.save();
 
       return res.status(200).send({ message: "password has been reset" });
+    }
+  })
+);
+
+userRoute.post(
+  "/account-activation",
+  expressAsyncHandler(async (req, res) => {
+    const token = req.body.token;
+    const user = await User.findOne({
+      activateToken: token,
+      activateExpireToken: { $gt: Date.now() },
+    });
+    if (!user) {
+      return res
+        .status(422)
+        .send({ message: "Session has expired, please try again" });
+    } else {
+      user.activateToken = undefined;
+      user.activateExpireToken = undefined;
+      user.verified = true;
+
+      await user.save();
+
+      return res.status(200).send({ message: "account is activated" });
     }
   })
 );

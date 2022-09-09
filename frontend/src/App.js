@@ -25,6 +25,7 @@ import {
   Signin,
   ResetPasswordWithEmail,
   NewPassword,
+  AccountActivation,
 } from "./container";
 import { Navbar, Loading } from "./components";
 import { loadingState } from "./atoms/atoms";
@@ -37,7 +38,7 @@ const App = () => {
   return (
     <div className="h-screen">
       <BrowserRouter>
-        <ToastContainer position="bottom-left" limit={1} />
+        <ToastContainer position="bottom-left" limit={2} newestOnTop />
         <Routes>
           <Route
             exact
@@ -129,7 +130,7 @@ const App = () => {
               </>
             }
           />
-          
+
           <Route
             exact
             path="/resetpassword/:token"
@@ -173,6 +174,12 @@ const App = () => {
             exact
             path="/payment/paymentsuccess"
             element={<PaymentSuccess />}
+          />
+
+          <Route
+            exact
+            path="/activation/:token"
+            element={<AccountActivation />}
           />
 
           <Route

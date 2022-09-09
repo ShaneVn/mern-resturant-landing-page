@@ -4,9 +4,10 @@ import { FaLock } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { userState } from "../../atoms/atoms";
-import { useRecoilState,} from "recoil";
+import { useRecoilState } from "recoil";
 import displayError from "../../utils/displayError";
 import { toast } from "react-toastify";
+import validator from "validator";
 import axios from "axios";
 
 function Signup() {
@@ -16,12 +17,36 @@ function Signup() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useRecoilState(userState);
-  const [error,setError] = useState("")
-  
+  const [error, setError] = useState("");
+  const [goodPassword, setGoodPassword] = useState(false);
 
+  const validate = (value) => {
+    if (
+      validator.isStrongPassword(value, {
+        minLength: 8,
+        minLowercase: 1,
+        minNumbers: 1,
+        minSymbols: 0,
+        minUppercase: 0,
+      })
+    ) {
+      setError("Good Password");
+      setPassword(value);
+      setGoodPassword(true);
+    } else {
+      setGoodPassword(false);
+      setError(
+        "Password should be at least 8 characters with 1 letter and 1 number"
+      );
+    }
+  };
 
   const submitForm = async (e) => {
     e.preventDefault();
+
+    if (!goodPassword) {
+      return;
+    }
 
     try {
       const { data } = await axios.post("/api/users/signup", {
@@ -29,13 +54,13 @@ function Signup() {
         name,
         password,
       });
-      setUser(data);
+
+      toast.success("An activation link has sent to your email");
+      navigate("/signin")
     } catch (err) {
-      setError(displayError(err))
-      toast.error(displayError(err));
+      toast.error(displayError(err), { toastId: "signUpError" });
     }
   };
-
 
   return (
     <div className="bg-[#12181b] h-screen flex__center " id="signin">
@@ -76,7 +101,7 @@ function Signup() {
             type="password"
             className="p-3 pl-[54px] bg-[#454e56] rounded-[5rem] outline-none"
             placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => validate(e.target.value)}
           />
           <div className="absolute top-[154px] left-5">
             <AiOutlineUser fontSize={25} color="#9166cc" />
@@ -94,7 +119,7 @@ function Signup() {
           </button>
         </form>
 
-        { error && <p className="mb-5 text-[#FF9494] ">{error}</p>}
+        {error && <p className={`mb-5 ${goodPassword ? "text-[#09C372]" : "text-[#FF9494]" } text-center`}>{error}</p>}
         <p className="text-[#b2becd]">
           Already have an Account?{" "}
           <span
@@ -102,7 +127,7 @@ function Signup() {
             onClick={() => navigate("/signin")}
           >
             {" "}
-            Sign in
+            Sign In
           </span>
         </p>
       </div>

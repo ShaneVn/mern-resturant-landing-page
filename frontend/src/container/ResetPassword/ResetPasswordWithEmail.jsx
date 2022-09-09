@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { HiOutlineMail } from "react-icons/hi";
+import { HiOutlineArrowNarrowLeft, HiOutlineMail } from "react-icons/hi";
 import axios from "axios";
 import { toast } from "react-toastify";
 import displayError from "../../utils/displayError";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import {  loadingState } from "../../atoms/atoms";
+import { useNavigate } from "react-router-dom";
 
 
 function ResetPasswordWithEmail() {
   const [email, setEmail] = useState("");
   const [isloading, setIsloading] = useRecoilState(loadingState);
+  const navigate =useNavigate()
 
   const submitHanlder = async (e) => {
     e.preventDefault();
@@ -67,6 +69,15 @@ function ResetPasswordWithEmail() {
               )}
           </button>
         </form>
+        
+        <a
+            href="#order_body"
+            className="flex__center space-x-3 self-end  nav-hover cursor-pointer text-[#3E73CE]"
+            onClick={() => navigate("/signin")}
+          >
+            <HiOutlineArrowNarrowLeft fontSize={25} />{" "}
+            <h1>Back to Sign In</h1>
+          </a>
       </div>
     </div>
   );

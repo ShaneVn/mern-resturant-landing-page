@@ -30,7 +30,7 @@ function Signin() {
       toast.success("You Have Signed In")
     } catch (err) {
       setError(displayError(err));
-      toast.error(displayError(err));
+      toast.error(displayError(err),{toastId: "signInError"});
     }
   };
 
