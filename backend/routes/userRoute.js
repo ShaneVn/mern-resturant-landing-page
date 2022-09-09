@@ -24,7 +24,7 @@ const sendMailForActivation = (user, token) => {
       subject: "Account Activation",
       html: `
       <p>You have requested for account activation</p>
-      <h3>click on this <a href="https://restaurant-landing-page-shane.herokuapp.com/activation/${token}">link</a> to reset password </h3>`,
+      <h3>click on this <a href="https://restaurant-landing-page-shane.herokuapp.com/activation/${token}">link</a> to activate your account </h3>`,
     },
     (error) => {
       if (error) {

@@ -15,7 +15,7 @@ function AccountActivation() {
   const navigate = useNavigate();
   const { token } = useParams();
   const [isloading, setIsloading] = useRecoilState(loadingState);
-  const [error, setError] = useState(false);
+  const [AccountActivated, setAccountActivated] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,26 +25,25 @@ function AccountActivation() {
           token,
         });
 
-        setIsloading(false)
+        setIsloading(false);
+        setAccountActivated(true);
       } catch (err) {
+        setAccountActivated(false);
         setIsloading(false);
         toast.error(displayError(err), { toastId: "activationError" });
-        setError(true);
       }
     };
     fetchData();
   }, []);
-
-
 
   if (isloading) {
     return <Loading />;
   }
 
   return (
-    <>
-      {!error && (
-        <div className="flex__center h-screen section__padding relative ">
+    <div className="flex__center h-screen section__padding relative ">
+      {AccountActivated && (
+        <>
           <div className="flex-col-center space-y-5  ">
             <h1 className="text-3xl font-openSans font-bold">
               Account Verified
@@ -67,9 +66,9 @@ function AccountActivation() {
           <div className="absolute -z-30">
             <Lottie animationData={animation} loop={0} />
           </div>
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
 
