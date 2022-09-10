@@ -42,14 +42,14 @@ function AccountActivation() {
 
   return (
     <div className="flex__center h-screen section__padding relative ">
-      {AccountActivated && (
+      {AccountActivated ? (
         <>
           <div className="flex-col-center space-y-5  ">
             <h1 className="text-3xl font-openSans font-bold">
               Account Verified
             </h1>
             <IoCheckmarkCircleOutline fontSize={100} color={"green"} />
-            <h1 className="text-3xl font-openSans font-bold">
+            <h1 className="text-3xl font-openSans font-bold text-center">
               {" "}
               Your Account has been activated{" "}
             </h1>
@@ -67,7 +67,13 @@ function AccountActivation() {
             <Lottie animationData={animation} loop={0} />
           </div>
         </>
-      )}
+      ) : <div
+      className="flex justify-center items-center nav-hover text-[#0000EE] hover:text-[green]"
+      onClick={() => navigate("/resendactivation")}
+    >
+      <HiOutlineArrowNarrowLeft fontSize={25} />{" "}
+      <h1 className="ml-5 text-xl">Resend Activation Email </h1>{" "}
+    </div>}
     </div>
   );
 }

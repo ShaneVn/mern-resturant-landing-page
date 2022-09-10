@@ -43,11 +43,10 @@ userRoute.post(
     const user = await User.findOne({ email: req.body.email });
     if (user) {
       if (user.verified === false) {
+        user.activateToken = token;
+        user.activateExpireToken = Date.now() + 1800000;
 
-        user.activateToken = token
-        user.activateExpireToken = Date.now() + 1800000
-
-        await user.save()
+        await user.save();
         sendMailForActivation(user, token);
 
         return res.status(401).send({
@@ -85,7 +84,7 @@ userRoute.post(
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
       activateToken: token,
-      activateExpireToken: Date.now() + 1800000
+      activateExpireToken: Date.now() + 1800000,
     });
     const user = await newUser.save();
 
@@ -186,6 +185,29 @@ userRoute.post(
       await user.save();
 
       return res.status(200).send({ message: "account is activated" });
+    }
+  })
+);
+
+userRoute.post(
+  "/resend-activation",
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (user) {
+      if (user.verified === true) {
+        return res
+          .status(400)
+          .send({ message: "This account has already activated" });
+      }
+      const token = crypto.randomBytes(60).toString("hex");
+      user.activateToken = token;
+      user.activateExpireToken = Date.now() + 1800000;
+      await user.save();
+      sendMailForActivation(user, token);
+      res.status(201).send({ message: "email has been sent" });
+    } else {
+      res.status(400).send({ message: "email does not exist" });
     }
   })
 );

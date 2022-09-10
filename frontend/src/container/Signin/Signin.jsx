@@ -9,6 +9,7 @@ import displayError from "../../utils/displayError";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Signin.css";
+import DropDown from "../../components/DropDown/DropDown";
 
 function Signin() {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ function Signin() {
 
     try {
       const { data } = await axios.post("/api/users/signin", {
-        email,
+        email: email.toLowerCase(),
         password,
       });
       setUser(data);
@@ -81,7 +82,7 @@ function Signin() {
             <p className="mb-5 text-[#FF9494] ">{error}</p>
           </div>
         )} */}
-        <p className="text-[#b2becd]">
+        <p className="text-[#b2becd] mb-3">
           Don' have an Account?{" "}
           <span
             className="cursor-pointer text-[#3E73CE] nav-hover"
@@ -92,13 +93,14 @@ function Signin() {
           </span>
         </p>
 
-        <p
+        {/* <p
             className="cursor-pointer text-[#3E73CE] nav-hover mt-4"
             onClick={() => navigate("/resetpassword")}
           >
             {" "}
             Forgot Password 
-          </p>
+          </p> */}
+          <DropDown/>
       </div>
     </div>
   );

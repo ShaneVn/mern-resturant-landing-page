@@ -7,7 +7,7 @@ import CheckOutItems from './CheckOutItems/CheckOutItems';
 import CheckOutDetailsList from './CheckOutDetailsList/CheckOutDetailsList';
 import Loading from './Loading/Loading';
 import PaginationContainer from './Pagination/Pagination';
-
+import DropDown from './DropDown/DropDown';
 
 export {
   PaginationContainer,

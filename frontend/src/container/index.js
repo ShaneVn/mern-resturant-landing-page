@@ -20,9 +20,11 @@ import  PaymentSuccess  from './PaymentSuccess/PaymentSuccess';
 import ResetPasswordWithEmail from './ResetPassword/ResetPasswordWithEmail';
 import NewPassword from './NewPassword/NewPassword';
 import AccountActivation from './AccountActivation/AccountActivation';
+import ResendActivation from './ResendActivation/ResendActivation';
 
 
 export {
+  ResendActivation,
   AccountActivation,
   NewPassword,
   ResetPasswordWithEmail,

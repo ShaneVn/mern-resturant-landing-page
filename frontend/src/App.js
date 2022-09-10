@@ -26,6 +26,7 @@ import {
   ResetPasswordWithEmail,
   NewPassword,
   AccountActivation,
+  ResendActivation,
 } from "./container";
 import { Navbar, Loading } from "./components";
 import { loadingState } from "./atoms/atoms";
@@ -180,6 +181,12 @@ const App = () => {
             exact
             path="/activation/:token"
             element={<AccountActivation />}
+          />
+
+          <Route
+            exact
+            path="/resendactivation"
+            element={<ResendActivation />}
           />
 
           <Route

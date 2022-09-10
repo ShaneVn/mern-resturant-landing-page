@@ -50,7 +50,7 @@ function Signup() {
 
     try {
       const { data } = await axios.post("/api/users/signup", {
-        email,
+        email: email.toLowerCase(),
         name,
         password,
       });

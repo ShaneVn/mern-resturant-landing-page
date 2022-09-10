@@ -18,7 +18,7 @@ function ResetPasswordWithEmail() {
     e.preventDefault();
     try {
         setIsloading(true)
-      await axios.post("/api/users/reset-password", { email });
+      await axios.post("/api/users/reset-password", { email: email.toLowerCase() });
       setIsloading(false)
       setEmail("")
       toast.success('The password reset link has sent to your Email')
