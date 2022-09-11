@@ -40,7 +40,7 @@ const Header = () => {
               Tells a Story
             </h1>
           </div>
-          <div className="" onClick={() => navigate("/order")}>
+          <div className="" onClick={() => navigate("/order?mainCourse=Salad&sideDish=Appetizer")}>
             <Button text="Explore Menu" section="order_menu" />
           </div>
         </div>

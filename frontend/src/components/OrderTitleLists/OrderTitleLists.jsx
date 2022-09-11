@@ -1,10 +1,14 @@
 import React from "react";
 
-function OrderTitleLists({ category, active, setSelected }) {
+function OrderTitleLists({ category, active, setSearchParams, updatedSearchParams, menu}) {
   return (
     <div>
       <li  className={ `py-2  ${active && "text-white duration-200 ease-in" }`}
-      onClick={()=>setSelected(category)}>{category}</li>
+      onClick={()=>{
+        updatedSearchParams.set(menu, category)
+        setSearchParams(updatedSearchParams.toString());
+      }}>{category}</li>
+      
     </div>
   );
 }

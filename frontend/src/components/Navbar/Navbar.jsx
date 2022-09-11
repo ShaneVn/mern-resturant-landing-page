@@ -2,7 +2,7 @@ import { useState } from "react";
 import images from "../../constants/images";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { RiShoppingCartLine, RiShoppingCartFill } from "react-icons/ri";
 import { useRecoilState } from "recoil";
 import { cartState } from "../../atoms/atoms";
@@ -95,7 +95,7 @@ const Navbar = () => {
         </div>
         <a
           className="nav-hover text-lg "
-          onClick={() => navigate("/order")}
+          onClick={() => navigate("/order?mainCourse=Salad&sideDish=Appetizer")}
           href="#order_home"
         >
           Order Online
@@ -122,13 +122,9 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <a
-            className="nav-hover text-lg"
-            onClick={() => navigate("/signin")}
-            href="#signin"
-          >
+          <Link className="nav-hover text-lg" to={"/signin"}>
             Login / Register
-          </a>
+          </Link>
         )}
       </div>
 
@@ -183,7 +179,7 @@ const Navbar = () => {
                 Home
               </a>
             </li>
-            <li className="" onClick={() => navigate("/order")}>
+            <li className="" onClick={() => navigate("/order?mainCourse=Salad&sideDish=Appetizer")}>
               <a className="nav-hover" href="#order_home">
                 Order
               </a>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {  Link } from "react-router-dom";
+
 
 function DropDown() {
   const [active, setActive] = useState(false);
-  const navigate = useNavigate()
 
   console.log(active);
 
@@ -43,13 +43,13 @@ function DropDown() {
         role="menu"
       >
         <div className="py-1" role="none">
-          <a href="#" className=" block px-4 py-2  nav-hover" onClick={()=>navigate("/resetpassword")}>
+          <Link className=" block px-4 py-2  nav-hover" to = {"/resetpassword"}>
             Password Reset
-          </a>
+          </Link>
 
-          <a className=" block w-full px-4 py-2 text-left nav-hover" onClick={()=>navigate("/resendactivation")}>
+          <Link className=" block w-full px-4 py-2 text-left nav-hover" to ={"/resendactivation"}>
             Resend Activation Email
-          </a>
+          </Link>
         </div>
       </div>
     </div>

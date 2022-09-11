@@ -4,12 +4,17 @@ import { images } from "../../constants";
 import OrderTitleLists from "../../components/OrderTitleLists/OrderTitleLists";
 import { data } from "../../constants";
 import "./OrderBody.css";
+import { useSearchParams } from "react-router-dom";
 
 function OrderBody() {
-  const [firstSelected, setFirstSelected] = useState("Salad");
+  // const [firstSelected, setFirstSelected] = useState("Salad");
   const [firstData, setFirstData] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const mainCourse = searchParams.get("mainCourse");
+  const sideDish = searchParams.get("sideDish");
+  let updatedSearchParams = new URLSearchParams(searchParams.toString());
 
-  const [secondSelected, setSecondSelected] = useState("Appetizer");
+  // const [secondSelected, setSecondSelected] = useState("Appetizer");
   const [secondData, setSecondData] = useState([]);
 
   const pizzaMenu = data.pizzaMenu;
@@ -18,8 +23,10 @@ function OrderBody() {
   const dessertMenu = data.dessertMenu;
   const appetizerMenu = data.appetizerMenu;
 
+
+
   useEffect(() => {
-    switch (firstSelected) {
+    switch (mainCourse) {
       case "Pizza":
         setFirstData(pizzaMenu);
         break;
@@ -32,10 +39,10 @@ function OrderBody() {
       default:
         setFirstData(saladMenu);
     }
-  }, [firstSelected]);
+  }, [mainCourse]);
 
   useEffect(() => {
-    switch (secondSelected) {
+    switch (sideDish) {
       case "Dessert":
         setSecondData(dessertMenu);
         break;
@@ -45,7 +52,7 @@ function OrderBody() {
       default:
         setSecondData(appetizerMenu);
     }
-  }, [secondSelected]);
+  }, [sideDish]);
 
   return (
     <div
@@ -64,8 +71,10 @@ function OrderBody() {
           <OrderTitleLists
             category={title.category}
             key={title.category + title.id}
-            setSelected={setFirstSelected}
-            active={firstSelected === title.category}
+            active={mainCourse === title.category}
+            setSearchParams={setSearchParams}
+            updatedSearchParams={updatedSearchParams}
+            menu="mainCourse"
           />
         ))}
       </ul>
@@ -102,8 +111,10 @@ function OrderBody() {
           <OrderTitleLists
             category={title.category}
             key={title.category + title.id}
-            setSelected={setSecondSelected}
-            active={secondSelected === title.category}
+            active={sideDish === title.category}
+            setSearchParams={setSearchParams}
+            updatedSearchParams={updatedSearchParams}
+            menu="sideDish"
           />
         ))}
       </ul>

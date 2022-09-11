@@ -5,31 +5,28 @@ import { toast } from "react-toastify";
 import displayError from "../../utils/displayError";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRecoilState } from "recoil";
-import {  loadingState } from "../../atoms/atoms";
-import { useNavigate } from "react-router-dom";
-
+import { loadingState } from "../../atoms/atoms";
+import { Link } from "react-router-dom";
 
 function ResetPasswordWithEmail() {
   const [email, setEmail] = useState("");
   const [isloading, setIsloading] = useRecoilState(loadingState);
-  const navigate =useNavigate()
 
   const submitHanlder = async (e) => {
     e.preventDefault();
     try {
-        setIsloading(true)
-      await axios.post("/api/users/reset-password", { email: email.toLowerCase() });
-      setIsloading(false)
-      setEmail("")
-      toast.success('The password reset link has sent to your Email')
+      setIsloading(true);
+      await axios.post("/api/users/reset-password", {
+        email: email.toLowerCase(),
+      });
+      setIsloading(false);
+      setEmail("");
+      toast.success("The password reset link has sent to your Email");
     } catch (err) {
-        setIsloading(false)
+      setIsloading(false);
       toast.error(displayError(err));
     }
   };
-
-
-  
 
   return (
     <div className="bg-[#12181b] h-screen flex__center " id="signin">
@@ -42,7 +39,6 @@ function ResetPasswordWithEmail() {
           className="flex flex-col self-start w-full relative"
           onSubmit={submitHanlder}
         >
-         
           <input
             type="email"
             className="p-3 pl-[54px] bg-[#454e56] rounded-[5rem] outline-none  "
@@ -57,27 +53,25 @@ function ResetPasswordWithEmail() {
           <button className="bg-[#09C372] my-8 self-center relative group py-2 flex__center font-medium w-[60%] rounded-lg text-color_white text-xl cursor-pointer ">
             <div className="absolute inset-0 bg-color_black  duration-300 ease-in-out opacity-0 group-hover:opacity-30 w-full h-full" />
             {isloading ? (
-                <>
-                  <div className="animate-spin mr-5">
-                    {" "}
-                    <AiOutlineLoading3Quarters fontSize={22} />
-                  </div>{" "}
-                  <p>Loading....</p>
-                </>
-              ) : (
-                "Send"
-              )}
+              <>
+                <div className="animate-spin mr-5">
+                  {" "}
+                  <AiOutlineLoading3Quarters fontSize={22} />
+                </div>{" "}
+                <p>Loading....</p>
+              </>
+            ) : (
+              "Send"
+            )}
           </button>
         </form>
-        
-        <a
-            href="#order_body"
-            className="flex__center space-x-3 self-end  nav-hover cursor-pointer text-[#3E73CE]"
-            onClick={() => navigate("/signin")}
-          >
-            <HiOutlineArrowNarrowLeft fontSize={25} />{" "}
-            <h1>Back to Sign In</h1>
-          </a>
+
+        <Link
+          className="flex__center space-x-3 self-end  nav-hover cursor-pointer text-[#3E73CE]"
+          to={"/signin"}
+        >
+          <HiOutlineArrowNarrowLeft fontSize={25} /> <h1>Back to Sign In</h1>
+        </Link>
       </div>
     </div>
   );
