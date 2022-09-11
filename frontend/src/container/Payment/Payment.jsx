@@ -176,7 +176,8 @@ function Payment() {
           />
 
           {cart.length > 0 && (
-            <button className="bg-[#FFA41C] relative group  py-3 flex__center font-medium w-full rounded-lg text-color_black cursor-pointer ">
+            <button  disabled={isloading && true} 
+            className="bg-[#FFA41C] relative group  py-3 flex__center font-medium w-full rounded-lg text-color_black cursor-pointer ">
               <div className="absolute inset-0 bg-color_black  duration-300 ease-in-out opacity-0 group-hover:opacity-30 w-full h-full" />
               {isloading ? (
                 <>

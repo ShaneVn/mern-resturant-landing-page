@@ -11,9 +11,9 @@ function PaymentSuccess() {
   const [orderNumber, setOrderNumber] = useRecoilState(orderNumberState);
   const navigate = useNavigate();
 
-  // useEffect(()=>{
-  //       !orderNumber && navigate("/")
-  // },[])
+  useEffect(()=>{
+        !orderNumber && navigate("/")
+  },[])
 
   return (
     <div className="flex__center h-screen section__padding relative ">
