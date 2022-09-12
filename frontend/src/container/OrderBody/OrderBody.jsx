@@ -5,54 +5,69 @@ import OrderTitleLists from "../../components/OrderTitleLists/OrderTitleLists";
 import { data } from "../../constants";
 import "./OrderBody.css";
 import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 function OrderBody() {
-  // const [firstSelected, setFirstSelected] = useState("Salad");
-  const [firstData, setFirstData] = useState([]);
+  
+  const [mainCourseData, setMainCourseData] = useState([]);
+  const [sideDishData, setSideDishData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const mainCourse = searchParams.get("mainCourse");
   const sideDish = searchParams.get("sideDish");
   let updatedSearchParams = new URLSearchParams(searchParams.toString());
 
-  // const [secondSelected, setSecondSelected] = useState("Appetizer");
-  const [secondData, setSecondData] = useState([]);
-
-  const pizzaMenu = data.pizzaMenu;
-  const saladMenu = data.saladMenu;
-  const pastaMenu = data.pastaMenu;
-  const dessertMenu = data.dessertMenu;
-  const appetizerMenu = data.appetizerMenu;
 
 
 
   useEffect(() => {
-    switch (mainCourse) {
-      case "Pizza":
-        setFirstData(pizzaMenu);
-        break;
-      case "Salad":
-        setFirstData(saladMenu);
-        break;
-      case "Pasta":
-        setFirstData(pastaMenu);
-        break;
-      default:
-        setFirstData(saladMenu);
-    }
-  }, [mainCourse]);
+    const fetchdata = async () => {
+      try {
+        const { data : productData  } = await axios.get(`/api/foodProducts/mainCourse?mainCourse=${mainCourse}&sideDish=${sideDish}`);
+        
+        setMainCourseData(productData.filter((product)=> product.category === mainCourse))
+        setSideDishData(productData.filter((product)=> product.category === sideDish))
 
-  useEffect(() => {
-    switch (sideDish) {
-      case "Dessert":
-        setSecondData(dessertMenu);
-        break;
-      case "Appetizer":
-        setSecondData(appetizerMenu);
-        break;
-      default:
-        setSecondData(appetizerMenu);
-    }
-  }, [sideDish]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchdata();
+  }, [mainCourse, sideDish]);
+
+ 
+
+ 
+// old way of querying data with just frontend
+
+  // useEffect(() => {
+  //   switch (mainCourse) {
+  //     case "Pizza":
+  //       setFirstData(pizzaMenu);
+  //       break;
+  //     case "Salad":
+  //       setFirstData(saladMenu);
+  //       break;
+  //     case "Pasta":
+  //       setFirstData(pastaMenu);
+  //       break;
+  //     default:
+  //       setFirstData(saladMenu);
+  //   }
+  // }, [mainCourse]);
+
+  // useEffect(() => {
+  //   switch (sideDish) {
+  //     case "Dessert":
+  //       setSecondData(dessertMenu);
+  //       break;
+  //     case "Appetizer":
+  //       setSecondData(appetizerMenu);
+  //       break;
+  //     default:
+  //       setSecondData(appetizerMenu);
+  //   }
+  // }, [sideDish]);
 
   return (
     <div
@@ -81,15 +96,15 @@ function OrderBody() {
 
       {/* food items here */}
       <div className="flex flex-col 2xl:flex-row justify-center items-center mb-[150px]">
-        {firstData.map((data) => (
+        {mainCourseData.map((data) => (
           <OrderItem
-            image={data.img}
-            alt={data.alt}
-            desc={data.desc}
+            image={data.image}
+            alt={data.name}
+            desc={data.description}
             name={data.name}
             price={data.price}
-            key={data.name + data.id}
-            id={data.name + data.id}
+            key={data._id}
+            id={data._id}
           />
         ))}
       </div>
@@ -120,15 +135,15 @@ function OrderBody() {
       </ul>
 
       <div className="flex flex-col 2xl:flex-row justify-center items-center  lg:mb-[100px]">
-        {secondData.map((data) => (
+        {sideDishData.map((data) => (
           <OrderItem
-            image={data.img}
-            alt={data.alt}
-            desc={data.desc}
-            name={data.name}
-            price={data.price}
-            key={data.name + data.id}
-            id={data.name + data.id}
+          image={data.image}
+          alt={data.name}
+          desc={data.description}
+          name={data.name}
+          price={data.price}
+          key={data._id}
+          id={data._id}
           />
         ))}
       </div>

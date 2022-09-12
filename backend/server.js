@@ -10,6 +10,7 @@ const userRoute = require("./routes/userRoute.js");
 const seedRouter = require("./routes/seedRoute.js");
 const sendEmailRoute = require("./routes/sendEmailRoute.js");
 const orderRoute = require("./routes/orderRoute.js");
+const foodProductsRoute = require("./routes/productRoute.js");
 const stripe = require("stripe")(process.env.REACT_APP_STRIPE_KEY);
 
 mongoose
@@ -52,6 +53,7 @@ app.use("/api/seed", seedRouter);
 app.use("/api/users", userRoute);
 app.use("/api/email", sendEmailRoute);
 app.use("/api/order", orderRoute);
+app.use("/api/foodProducts", foodProductsRoute )
 
 
 app.use((err, req, res, next) => {

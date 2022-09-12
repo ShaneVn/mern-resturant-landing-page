@@ -1,0 +1,107 @@
+module.exports = productData = [
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949030/restaurant-landing-page/product-1_qzfigv.jpg",
+    name: "Supreme Pizza",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 19.99,
+    category:"Pizza" 
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949030/restaurant-landing-page/product-2_asnyti.jpg",
+    name: "Hawaiian Paradise",
+    description: " Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 16.99,
+    category:"Pizza"
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949030/restaurant-landing-page/product-3_ewqjcm.jpg",
+    name: "Veggie Overload",
+    description: " Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 14.99,
+    category:"Pizza"
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949029/restaurant-landing-page/salad01_hnmbsy.jpg",
+    category: "Salad",
+    name: "Supreme Salad",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 19.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949029/restaurant-landing-page/salad02_edole4.jpg",
+    category: "Salad",
+    name: "Cobb salad",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 16.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949028/restaurant-landing-page/salad03_awcqiz.jpg",
+    category: "Salad",
+    name: "Toss Green Salad",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 14.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949006/restaurant-landing-page/pasta01_l6vuzh.jpg",
+    category: "Pasta",
+    name: "Amazing Pasta",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 19.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949006/restaurant-landing-page/pasta02_yplq8x.jpg",
+    category: "Pasta",
+    name: "Delicious Pasta",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 16.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949005/restaurant-landing-page/pasta03_o6y60s.jpg",
+    category: "Pasta",
+    name: "Awesome Pasta",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 14.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949034/restaurant-landing-page/sweet01_pwhhsp.jpg",
+    category: "Dessert",
+    name: "Amazing Dessert",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 19.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949019/restaurant-landing-page/sweet02_dvkjaj.jpg",
+    category: "Dessert",
+    name: "Delicious Dessert",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 16.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949015/restaurant-landing-page/sweet03_dntxnb.jpg",
+    category: "Dessert",
+    name: "Awesome Dessert",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 14.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949145/restaurant-landing-page/appetizer01_mmqa3e.jpg",
+    category: "Appetizer",
+    name: "Amazing Appetizer",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 19.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949146/restaurant-landing-page/appetizer02_egdmsr.jpg",
+    category: "Appetizer",
+    name: "Delicious Appetizer",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 16.99,
+  },
+  {
+    image: "https://res.cloudinary.com/djmglqyqx/image/upload/v1662949145/restaurant-landing-page/appetizer03_aqc0yt.jpg",
+    category: "Appetizer",
+    name: "Awesome Appetizer",
+    description: "Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto",
+    price: 14.99,
+  },
+];

@@ -26,6 +26,8 @@ function OrderItem({ desc, image, name, price, alt, id }) {
     } else setCart([...cart, { image, name, price, quantity: 1, id }]);
   };
 
+
+  console.log(cart)
  
 
   return (

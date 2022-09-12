@@ -9,6 +9,7 @@ const orderSchema = new mongoose.Schema(
         image: { type: String },
         price: { type: Number, required: true },
         total: { type: Number },
+        product: {type: mongoose.Schema.Types.ObjectId, ref:"Product"}
       },
     ],
     grandTotal: { type: Number, required: true },
