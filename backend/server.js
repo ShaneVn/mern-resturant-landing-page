@@ -7,7 +7,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const product = require("./data.js");
 const userRoute = require("./routes/userRoute.js");
-const seedRouter = require("./routes/seedRoute.js");
+// const seedRouter = require("./routes/seedRoute.js");
 const sendEmailRoute = require("./routes/sendEmailRoute.js");
 const orderRoute = require("./routes/orderRoute.js");
 const foodProductsRoute = require("./routes/productRoute.js");
@@ -49,7 +49,7 @@ app.post("/payment/create", async (req, res) => {
 });
 
 // combine different middlewares from different routes
-app.use("/api/seed", seedRouter);
+// app.use("/api/seed", seedRouter);
 app.use("/api/users", userRoute);
 app.use("/api/email", sendEmailRoute);
 app.use("/api/order", orderRoute);
