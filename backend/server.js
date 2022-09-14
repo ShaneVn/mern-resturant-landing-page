@@ -12,6 +12,8 @@ const sendEmailRoute = require("./routes/sendEmailRoute.js");
 const orderRoute = require("./routes/orderRoute.js");
 const foodProductsRoute = require("./routes/productRoute.js");
 const stripe = require("stripe")(process.env.REACT_APP_STRIPE_KEY);
+const cookieparser = require("cookie-parser");
+
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -28,6 +30,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+app.use(cookieparser());
 
 // get products from API
 app.get("/api/product", (req, res) => {
@@ -39,7 +42,7 @@ app.post("/payment/create", async (req, res) => {
   const total = req.body.amount;
 
   const payment = await stripe.paymentIntents.create({
-    amount: Math.round(total.toFixed(2)*100),
+    amount: Math.round(total.toFixed(2) * 100),
     currency: "usd",
   });
 
@@ -53,7 +56,8 @@ app.post("/payment/create", async (req, res) => {
 app.use("/api/users", userRoute);
 app.use("/api/email", sendEmailRoute);
 app.use("/api/order", orderRoute);
-app.use("/api/foodProducts", foodProductsRoute )
+app.use("/api/foodProducts", foodProductsRoute);
+
 
 
 app.use((err, req, res, next) => {

@@ -21,9 +21,11 @@ import ResetPasswordWithEmail from './ResetPassword/ResetPasswordWithEmail';
 import NewPassword from './NewPassword/NewPassword';
 import AccountActivation from './AccountActivation/AccountActivation';
 import ResendActivation from './ResendActivation/ResendActivation';
+import LoginButton from '../components/LoginButton/LoginButton';
 
 
 export {
+  LoginButton,
   ResendActivation,
   AccountActivation,
   NewPassword,

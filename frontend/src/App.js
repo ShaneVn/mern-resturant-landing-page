@@ -33,8 +33,11 @@ import { loadingState } from "./atoms/atoms";
 import { useRecoilState } from "recoil";
 import "./App.css";
 
+
 const App = () => {
   const [isloading, setIsloading] = useRecoilState(loadingState);
+
+  
 
   return (
     <div className="h-screen">

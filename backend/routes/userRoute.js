@@ -55,6 +55,16 @@ userRoute.post(
         });
       }
       if (bcrypt.compareSync(req.body.password, user.password)) {
+        
+        const refreshToken = utils.generateRefreshToken(user);
+
+        res.cookie("jwt", refreshToken, {
+          httpOnly: true,
+          sameSite: "None",
+          secure: true,
+          maxAge: 24 * 60 * 60 * 1000,
+        });
+
         res.send({
           _id: user._id,
           name: user.name,

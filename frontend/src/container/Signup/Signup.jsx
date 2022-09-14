@@ -3,12 +3,15 @@ import { AiOutlineUser } from "react-icons/ai";
 import { FaLock } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import { userState } from "../../atoms/atoms";
+import { userState,loadingState } from "../../atoms/atoms";
 import { useRecoilState } from "recoil";
 import displayError from "../../utils/displayError";
 import { toast } from "react-toastify";
 import validator from "validator";
 import axios from "axios";
+import LoginButton from "../../components/LoginButton/LoginButton";
+
+
 
 function Signup() {
   const navigate = useNavigate();
@@ -19,6 +22,7 @@ function Signup() {
   const [user, setUser] = useRecoilState(userState);
   const [error, setError] = useState("");
   const [goodPassword, setGoodPassword] = useState(false);
+  const [isloading, setIsloading] = useRecoilState(loadingState);
 
   const validate = (value) => {
     if (
@@ -49,15 +53,17 @@ function Signup() {
     }
 
     try {
+      setIsloading(true)
       const { data } = await axios.post("/api/users/signup", {
         email: email.toLowerCase(),
         name,
         password,
       });
-
+      setIsloading(false)
       toast.success("An activation link has sent to your email");
       navigate("/signin")
     } catch (err) {
+      setIsloading(false)
       toast.error(displayError(err), { toastId: "signUpError" });
     }
   };
@@ -78,10 +84,11 @@ function Signup() {
         >
           <p className="mb-3 ">Email</p>
           <input
-            type="text"
+            type="email"
             className="p-3 pl-[54px] bg-[#454e56] rounded-[5rem] outline-none  "
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <div className="absolute top-[46px] left-5 ">
@@ -94,6 +101,7 @@ function Signup() {
             className="p-3 pl-[54px] bg-[#454e56] rounded-[5rem] outline-none  "
             placeholder="UserName"
             onChange={(e) => setName(e.target.value)}
+            required
           />
 
           <p className="mb-3 mt-6">Password</p>
@@ -102,6 +110,7 @@ function Signup() {
             className="p-3 pl-[54px] bg-[#454e56] rounded-[5rem] outline-none"
             placeholder="Password"
             onChange={(e) => validate(e.target.value)}
+            required
           />
           <div className="absolute top-[154px] left-5">
             <AiOutlineUser fontSize={25} color="#9166cc" />
@@ -110,13 +119,7 @@ function Signup() {
           <div className="absolute top-[264px] left-5">
             <FaLock fontSize={22} color="#fa8142" />
           </div>
-          <button
-            href="#payment"
-            className="bg-[#09C372] my-8 self-center relative group py-2 flex__center font-medium w-[60%] rounded-lg text-color_white text-xl cursor-pointer "
-          >
-            <div className="absolute inset-0 bg-color_black  duration-300 ease-in-out opacity-0 group-hover:opacity-30 w-full h-full" />
-            Sign Up
-          </button>
+          <LoginButton text="Sign Up"/>
         </form>
 
         {error && <p className={`mb-5 ${goodPassword ? "text-[#09C372]" : "text-[#FF9494]" } text-center`}>{error}</p>}

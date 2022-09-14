@@ -5,7 +5,7 @@ import {  Link } from "react-router-dom";
 function DropDown() {
   const [active, setActive] = useState(false);
 
-  console.log(active);
+  
 
   return (
     <div className="relative inline-block text-left text-[#B2BECD] font-openSans">

@@ -15,6 +15,8 @@ const Navbar = () => {
   const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
 
+  
+
   const handleSignOut = () => {
     setUser(null);
     navigate("/");

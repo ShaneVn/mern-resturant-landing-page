@@ -3,19 +3,25 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaLock } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
-import { userState } from "../../atoms/atoms";
+import { userState,loadingState } from "../../atoms/atoms";
 import { useRecoilState } from "recoil";
 import displayError from "../../utils/displayError";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Signin.css";
 import DropDown from "../../components/DropDown/DropDown";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import LoginButton from "../../components/LoginButton/LoginButton";
+
+
+
 
 function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [user, setUser] = useRecoilState(userState);
+  const [isloading, setIsloading] = useRecoilState(loadingState);
 
   const navigate = useNavigate();
 
@@ -23,17 +29,22 @@ function Signin() {
     e.preventDefault();
 
     try {
+      setIsloading(true)
       const { data } = await axios.post("/api/users/signin", {
         email: email.toLowerCase(),
         password,
       });
+      setIsloading(false)
       setUser(data);
       toast.success("You Have Signed In")
     } catch (err) {
+      setIsloading(false)
       setError(displayError(err));
       toast.error(displayError(err),{toastId: "signInError"});
     }
   };
+
+  
 
   return (
     <div className="bg-[#12181b] h-screen flex__center " id="signin">
@@ -71,10 +82,7 @@ function Signin() {
             <FaLock fontSize={22} color="#9166cc" />
           </div>
 
-          <button className="bg-[#09C372] my-8 self-center relative group py-2 flex__center font-medium w-[60%] rounded-lg text-color_white text-xl cursor-pointer ">
-            <div className="absolute inset-0 bg-color_black  duration-300 ease-in-out opacity-0 group-hover:opacity-30 w-full h-full" />
-            Log in
-          </button>
+          <LoginButton text="Log in"/>
         </form>
 
         {/* {error && (

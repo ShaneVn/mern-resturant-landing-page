@@ -34,7 +34,9 @@ function OrderHistory() {
         const { data } = await axios.get("/api/order/history", {
           headers: { authorization: `Bearer ${user.token}` },
         });
-        setOrders(data);
+        setOrders(data.orderHistory);
+
+        data.newAccessToken && setUser((oldState) => ({ ...oldState, token: data.newAccessToken }));
         setIsloading(false);
       } catch (error) {
         setIsloading(false);
