@@ -51,7 +51,7 @@ const getRefreshToekn = (req, res, next) => {
       }
     });
   } else {
-    return res.status(406).json({ message: "Unauthorized" });
+    return res.status(406).json({ message: "Token expires, please sign in again" });
   }
 };
 
