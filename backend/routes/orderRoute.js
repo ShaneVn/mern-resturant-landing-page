@@ -28,7 +28,7 @@ orderRoute.get("/history", utils.isAuth, expressAsyncHandler(async(req,res)=>{
     
     const orderHistory = await Order.find({user: req.user._id}).sort({_id:-1})
     const newAccessToken = res.locals.newAccessToken
-    // const needRefreshToken = req.needRefreshToken
+    
     res.send({orderHistory, newAccessToken   })
 }))
 

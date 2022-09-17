@@ -40,18 +40,18 @@ const getRefreshToekn = (req, res, next) => {
     jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, decoded) => {
       if (err) {
         // Wrong Refesh Token
-        return res.status(406).json({ message: "Unauthorized" });
+        return res.status(406).json({ message: "Incorrect or expired token, please sign in again" });
       } else {
-        // Correct token we send a new access token
+        
         const userinfo = decoded;
         req.user = userinfo    
-        // req.needRefreshToken = true
+        // send newaccesstoken to the next middleware
         res.locals.newAccessToken = generateToken(userinfo)
         next();
       }
     });
   } else {
-    return res.status(406).json({ message: "Token expires, please sign in again" });
+    return res.status(406).json({ message: "No Token found, please sign in again" });
   }
 };
 

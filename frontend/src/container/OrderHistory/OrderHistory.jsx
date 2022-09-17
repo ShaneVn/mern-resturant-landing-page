@@ -6,26 +6,35 @@ import displayError from "../../utils/displayError";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Loading, PaginationContainer } from "../../components";
+import { useSearchParams } from "react-router-dom";
 
 function OrderHistory() {
   const [isloading, setIsloading] = useRecoilState(loadingState);
   const [user, setUser] = useRecoilState(userState);
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
-  const [orderPerPage, setOrderPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [orderPerPage, setOrderPerPage] = useState(28);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = searchParams.get("__page");
   const [itemOffset, setItemOffset] = useState(0);
 
-  // orders for current page
-  const endOffset = itemOffset + orderPerPage;
+    // Actul orders display for current page
+    const endOffset = itemOffset + orderPerPage;
 
-  const currentOrder = orders.slice(itemOffset, endOffset);
+    const currentOrder = orders.slice(itemOffset, endOffset);
+  
+    console.log(itemOffset)
+
 
   useEffect(() => {
     if (!user) {
       navigate("/signin");
       return;
     }
+
+    // get current page through searchParams in URL
+
+    setItemOffset((currentPage - 1) * orderPerPage);
 
     const fetchData = async () => {
       setIsloading(true);
@@ -36,7 +45,8 @@ function OrderHistory() {
         });
         setOrders(data.orderHistory);
 
-        data.newAccessToken && setUser((oldState) => ({ ...oldState, token: data.newAccessToken }));
+        data.newAccessToken &&
+          setUser((oldState) => ({ ...oldState, token: data.newAccessToken }));
         setIsloading(false);
       } catch (error) {
         setIsloading(false);
@@ -47,6 +57,9 @@ function OrderHistory() {
     };
     fetchData();
   }, [navigate]);
+
+ 
+
 
   if (isloading) {
     return <Loading />;
@@ -101,7 +114,7 @@ function OrderHistory() {
           orderPerPage={orderPerPage}
           totalOrders={orders.length}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
+          setCurrentPage={setSearchParams}
           setItemOffset={setItemOffset}
         />
       </div>
