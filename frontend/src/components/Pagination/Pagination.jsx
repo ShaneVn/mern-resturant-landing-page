@@ -117,7 +117,7 @@ function Pagination({
           <ul className="mr-6">&hellip;</ul>
         )}
 
-        <ul onClick={handleLastPage} className="cursor-pointer nav-hover ml-4">
+        <ul onClick={handleLastPage} className="cursor-pointer nav-hover ">
           {numberOfPages.length}
         </ul>
       </div>
@@ -134,7 +134,7 @@ function Pagination({
           1
         </ul>
         {parseInt(currentPage) >= 5 && numberOfPages.length > 6 && (
-          <ul className="ml-9">&hellip;</ul>
+          <ul className="ml-7">&hellip;</ul>
         )}
       </div>
     );
@@ -142,7 +142,7 @@ function Pagination({
 
 
   return (
-    <div className="flex justify-center items-center mt-6 space-x-12 ">
+    <div className="flex justify-center items-center mt-12 space-x-12 ">
      { <button
       disabled = {parseInt(currentPage) < 2}
       onClick={handlePreviousClick}

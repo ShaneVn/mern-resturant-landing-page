@@ -13,18 +13,15 @@ function OrderHistory() {
   const [user, setUser] = useRecoilState(userState);
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
-  const [orderPerPage, setOrderPerPage] = useState(28);
+  const [orderPerPage, setOrderPerPage] = useState(5);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = searchParams.get("__page");
   const [itemOffset, setItemOffset] = useState(0);
 
-    // Actul orders display for current page
-    const endOffset = itemOffset + orderPerPage;
+  // Actul orders display for current page
+  const endOffset = itemOffset + orderPerPage;
 
-    const currentOrder = orders.slice(itemOffset, endOffset);
-  
-    console.log(itemOffset)
-
+  const currentOrder = orders.slice(itemOffset, endOffset);
 
   useEffect(() => {
     if (!user) {
@@ -57,9 +54,6 @@ function OrderHistory() {
     };
     fetchData();
   }, [navigate]);
-
- 
-
 
   if (isloading) {
     return <Loading />;
