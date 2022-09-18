@@ -54,33 +54,28 @@ function Pagination({
     setItemOffset(0);
   };
 
-
   // handle click when you click on the last page
   const handleLastPage = () => {
     setCurrentPage({ __page: numberOfPages.length });
     setItemOffset((numberOfPages.length - 1) * orderPerPage);
   };
 
-
   // handle click when you click on the previous button
   const handlePreviousClick = () => {
-    const previousPageInNumber = parseInt(currentPage) -1
-  
-    setCurrentPage({ __page: previousPageInNumber})
-    setItemOffset((previousPageInNumber -1) * orderPerPage);
+    const previousPageInNumber = parseInt(currentPage) - 1;
 
-  }
+    setCurrentPage({ __page: previousPageInNumber });
+    setItemOffset((previousPageInNumber - 1) * orderPerPage);
+  };
 
-// handle click when you click on the next button
+  // handle click when you click on the next button
   const handleNextClick = () => {
-    const nextPageInNumber = parseInt(currentPage) +1
-    
-    setCurrentPage({ __page: nextPageInNumber})
-    setItemOffset((nextPageInNumber -1 ) * orderPerPage);
+    const nextPageInNumber = parseInt(currentPage) + 1;
 
-  }
+    setCurrentPage({ __page: nextPageInNumber });
+    setItemOffset((nextPageInNumber - 1) * orderPerPage);
+  };
 
- 
   //  show pages based on page range
   const pageNumbers = pageRange?.map((page) => {
     if (numberOfPages.length > 0) {
@@ -113,9 +108,7 @@ function Pagination({
   ) {
     pageIncrementEllipses = (
       <div className="flex">
-        {numberOfPages.length > 6 && (
-          <ul className="mr-6">&hellip;</ul>
-        )}
+        {numberOfPages.length > 6 && <ul className="mr-6">&hellip;</ul>}
 
         <ul onClick={handleLastPage} className="cursor-pointer nav-hover ">
           {numberOfPages.length}
@@ -140,24 +133,30 @@ function Pagination({
     );
   }
 
-
+ 
   return (
     <div className="flex justify-center items-center mt-12 space-x-12 ">
-     { <button
-      disabled = {parseInt(currentPage) < 2}
-      onClick={handlePreviousClick}
-      className=" border-[1px] border-color_black rounded-md px-5 py-2 nav-hover">
-        Prev
-      </button> }
+      {numberOfPages.length > 1 && (
+        <button
+          disabled={parseInt(currentPage) < 2}
+          onClick={handlePreviousClick}
+          className=" border-[1px] border-color_black rounded-md px-5 py-2 nav-hover"
+        >
+          Prev
+        </button>
+      )}
       {pageDecremenEllipses}
       {pageNumbers}
       {pageIncrementEllipses}
-      <button
-      disabled = {parseInt(currentPage) === numberOfPages.length}
-      onClick={handleNextClick }
-      className=" border-[1px] border-color_black rounded-md px-5 py-2 nav-hover">
-        Next
-      </button>
+      {numberOfPages.length > 1 && (
+        <button
+          disabled={parseInt(currentPage) === numberOfPages.length}
+          onClick={handleNextClick}
+          className=" border-[1px] border-color_black rounded-md px-5 py-2 nav-hover"
+        >
+          Next
+        </button>
+      )}
     </div>
   );
 }

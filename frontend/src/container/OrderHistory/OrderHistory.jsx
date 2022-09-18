@@ -13,7 +13,7 @@ function OrderHistory() {
   const [user, setUser] = useRecoilState(userState);
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
-  const [orderPerPage, setOrderPerPage] = useState(5);
+  const [orderPerPage, setOrderPerPage] = useState(26);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = searchParams.get("__page");
   const [itemOffset, setItemOffset] = useState(0);
